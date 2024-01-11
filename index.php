@@ -103,18 +103,20 @@ require 'function.php';
                                         <?php
                                         $get = mysqli_query($c, "select * from pesanan p, pelanggan pl where p.idpelanggan=pl.
                                         idpelanggan");
-
+                                        // ini join table query php menghubungkan table pesanan + table pelanggan
+                                      
                                         while ($p = mysqli_fetch_array($get)) {
                                             $idpesanan = $p['idpesanan'];
                                             $tanggal = $p['tanggal'];
                                             $namapelanggan = $p['namapelanggan'];
+                                            $alamat = $p['alamat'];
 
                                         ?>
 
                                             <tr>
                                                 <td><?= $idpesanan; ?></td>
                                                 <td><?= $tanggal; ?></td>
-                                                <td><?= $namapelanggan; ?></td>
+                                                <td><?= $namapelanggan; ?> - <?= $alamat; ?></td>
                                                 <td>Jumlah</td>
                                                 <td>Tampikann Delete</td>
                                             </tr>

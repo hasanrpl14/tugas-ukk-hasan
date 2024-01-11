@@ -67,13 +67,13 @@ if(isset($_POST['tambahpelanggan'])){
     if($insert){
         echo '
         <script>alert("Berhasil menambah pelanggan baru");
-        window.location.href="index.php"
+        window.location.href="pelanggan.php"
         </script>
         ';
     } else {
         echo '
         <script>alert("Gagal menambah pelanggan baru");
-        window.location.href="index.php"
+        window.location.href="pelangga.php"
         </script>
         ';
     }
@@ -83,18 +83,18 @@ if(isset($_POST['tambahpelanggan'])){
 if(isset($_POST['tambahpesanan'])){
     $idpelanggan = $_POST['idpelanggan'];
 
-    $insert = mysqli_query($c, "INSERT INTO pesanan (idpelanggan) VALUES ('$idpeanggan')");
+    $insert = mysqli_query($c, "INSERT INTO pesanan (idpelanggan) VALUES ('$idpelanggan')");
 
     if($insert){
         echo '
-        <script>alert("Berhasil menambah pelanggan baru");
-        window.location.href="pesanan.php"
+        <script>alert("Berhasil menambah pesanan baru");
+        window.location.href="index.php"
         </script>
         ';
     } else {
         echo '
-        <script>alert("Gagal menambah pelanggan baru");
-        window.location.href="pelanggan.php"
+        <script>alert("Gagal menambah pesanan baru");
+        window.location.href="index.php"
         </script>
         ';
     }

@@ -100,6 +100,22 @@ if(isset($_POST['tambahpesanan'])){
     }
 }
 
+if(isset($_POST['tambahproduk'])){
+    $idproduk = $_POST['idproduk'];
+    $idp = $_POST['idp'];
+    $qty = $_POST['qty']; // jumlah
 
+    $insert = mysqli_query($c, "INSERT INTO detailpesanan (idpesanan,idproduk,qty) VALUES ('$idp','$idproduk','$qty')");
+
+    if($insert){
+        header('location:view.php?idp='.$idp);
+    } else {
+        echo '
+        <script>alert("Gagal menambah pesanan baru");
+        window.location.href="view.php?idp='.$idp.'"
+        </script>
+        ';
+    }
+}
 
 ?>

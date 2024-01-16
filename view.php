@@ -2,6 +2,19 @@
 
 require 'function.php';
 
+
+if(isset($_GET['idp'])){
+    $idp = $_GET['idp'];
+    $ambilnamapelanggan = mysqli_query($c, "select * from pesanan p, pelanggan pl where p.idpelanggan=pl.idpelanggan and p.idpesanan=$idp");
+    // $ambilnamapelanggan = mysqli_query($ko, "SELECT * FROM pesanan p JOIN pelanggan pl ON p.idpelanggan = pl.idpelanggan WHERE p.idpesanan = $idp");
+    $np = mysqli_fetch_array($ambilnamapelanggan);
+    $namapel = $np['namapelanggan'];
+}   else{
+    header('Location:index.php');
+}
+// validasi if di atas jika tidak ada url view.php?idp=1 
+// intinya jika di urlnya tidak ada id pesanan maka akan kembali ke halaman index
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +25,7 @@ require 'function.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Data Pesanan</title>
+    <title>View Data Pesanan</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -60,26 +73,15 @@ require 'function.php';
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Data Pesanan</h1>
+                    <h1 class="mt-4">Data Pesanan:  <?=$idp;?></h1>
+                    <h4 class="mt-4">Nama Pelanggan:  <?=$namapel;?></h4>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Selamat Datang</li>
                     </ol>
-                    <div class="row">
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">Primary Card</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
 
                     <!-- Button to Open the Modal -->
                     <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
-                        Tambah Pesanan Baru
+                        Tambah Barang
                     </button>
 
                     <div class="card mb-4">
@@ -92,39 +94,38 @@ require 'function.php';
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID Pesanan</th>
-                                            <th>Tanggal</th>
-                                            <th>Nama Pelanggan</th>
+                                            <th>No</th>
+                                            <th>Nama Produk</th>
+                                            <th>Harga Satuan</th>
                                             <th>Jumlah</th>
+                                            <th>Sub-total</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $get = mysqli_query($c, "select * from pesanan p, pelanggan pl where p.idpelanggan=pl.
-                                        idpelanggan");
-                                        // ini join table query php menghubungkan table pesanan + table pelanggan
-                                      
-                                        while ($p = mysqli_fetch_array($get)) {
-                                            $idpesanan = $p['idpesanan'];
-                                            $tanggal = $p['tanggal'];
-                                            $namapelanggan = $p['namapelanggan'];
-                                            $alamat = $p['alamat'];
+                                        $get = mysqli_query($c, "select * from detailpesanan p, produk pr where p.idproduk=pr.
+                                        idproduk and idpesanan='$idp'");
+                                        // ini join table query php menghubungkan table detailpesanan + table produk
+                                      $i = 1;
 
-                                            // hitung jumlah
-                                            $hitungjumlah = mysqli_query($c,"select * from detailpesanan where
-                                            idpesanan='$idpesanan'");
-                                            $jumlah = mysqli_num_rows($hitungjumlah);
+                                        while ($p = mysqli_fetch_array($get)) {
+                                            $qty = $p['qty'];
+                                            $harga = $p['harga'];
+                                            $namaproduk = $p['namaproduk'];
+                                            $subtotal = $qty*$harga;
 
                                         ?>
 
                                             <tr>
-                                                <td><?= $idpesanan; ?></td>
-                                                <td><?= $tanggal; ?></td>
-                                                <td><?= $namapelanggan; ?> - <?= $alamat; ?></td>
-                                                <td><?= $jumlah; ?></td>
-                                                <td><a href="view.php?idp=<?=$idpesanan;?>"
-                                                class="btn btn-primary" target="_blank">Tampilkan</a>Delete</td>
+                                                <td><?= $i++; ?></td>
+                                                <td><?= $namaproduk; ?></td>
+                                                <td>Rp<?=number_format($harga); ?></td>
+                                                <td><?=number_format($qty); ?></td>
+                                                <td>Rp<?=number_format($subtotal); ?></td>
+                                                <td>Tampikann Delete</td>
+                                                <!-- number format berfungsi untuk menformat angka contoh
+                                            200000 menjadi seperti ini 200,000 jadi ada komanya -->
                                             </tr>
 
                                         <?php
@@ -177,32 +178,34 @@ require 'function.php';
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    Pilih pelanggan
-                    <select name="idpelanggan" class="form-control">
+                    Pilih pesanan
+                    <select name="idproduk" class="form-control">
 
                         <?php
-                        $getpelanggan = mysqli_query($c, "select * from pelanggan");
+                        $getproduk = mysqli_query($c, "select * from produk where idproduk not in (select idproduk from 
+                        detailpesanan where idpesanan='$idp')");
 
-
-                        while($pl = mysqli_fetch_array($getpelanggan)) {
-                             $namapelanggan = $pl['namapelanggan'];
-                             $idpelanggan = $pl['idpelanggan'];
-                             $alamat = $pl['alamat'];
+                        while($pl = mysqli_fetch_array($getproduk)) {
+                             $namaproduk = $pl['namaproduk'];
+                             $stock = $pl['stock'];
+                             $deskripsi = $pl['deskripsi'];
+                             $idproduk = $pl['idproduk'];
                         ?>
 
-                            <option value="<?=$idpelanggan;?>"><?=$namapelanggan;?> - <?=$alamat;?></option>
+                            <option value="<?=$idproduk;?>"><?=$namaproduk;?> - <?=$deskripsi;?></option>
 
                         <?php
                         }
                         ?>
 
                     </select>
-
+                        <input type="number" name="qty" class="form-control mt-4" placeholder="Jumlah">
+                        <input type="hidden" name="idp" value="<?=$idp;?>">
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-succes" name="tambahpesanan">Submit</button>
+                    <button type="submit" class="btn btn-success" name="tambahproduk">Submit</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
 

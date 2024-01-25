@@ -1,5 +1,6 @@
 <?php
 include 'koneksi.php';
+require 'ceklogin.php';
 session_start();
 
 // Cek apakah pengguna sudah login
@@ -9,12 +10,11 @@ if (!isset($_SESSION['username'])) {
     exit(); // Pastikan untuk keluar setelah melakukan pengalihan header
 }
 
-//Hitung jumlah pelanggan
-$h1 = mysqli_query($c, "select * from pelanggan");
-$h2 = mysqli_num_rows($h1); // jumlah pelanggan
+//Hitung jumlah pesanan
+$h1 = mysqli_query($c, "select * from user");
+$h2 = mysqli_num_rows($h1); // jumlah pesanan
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +24,7 @@ $h2 = mysqli_num_rows($h1); // jumlah pelanggan
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Pelanggan</title>
+    <title>Data User</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -72,63 +72,71 @@ $h2 = mysqli_num_rows($h1); // jumlah pelanggan
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Data Pelanggan</h1>
+                    <h1 class="mt-4">Data User</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Selamat Datang</li>
                     </ol>
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">Jumlah Pelanggan : <?=$h2;?></div>
+                                <div class="card-body">Jumlah user: <?=$h2;?></div>
                             </div>
                         </div>
+
                     </div>
 
                     <!-- Button to Open the Modal -->
                     <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
-                        Tambah Pelanggan
+                        Tambah Pesanan Baru
                     </button>
-
 
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Data Pelanggan
+                            Data Pesanan
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Nama Pelanggan</th>
-                                            <th>No telepon</th>
-                                            <th>Alamat</th>
+                                            <th>ID User</th>
+                                            <th>Username</th>
+                                            <th>Nama</th>
+                                            <th>Level</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <?php
-                                        $get = mysqli_query($c, "select * from pelanggan");
-                                        $i = 1; //penomoran
-
+                                        $get = mysqli_query($c, "select * from user");
+                                        // ini join table query php menghubungkan table pesanan + table pelanggan
+                                      
                                         while ($p = mysqli_fetch_array($get)) {
-                                            $namapelanggan = $p['NamaPelanggan'];
-                                            $notelp = $p['NomorTelepon'];
-                                            $alamat = $p['Alamat'];
+                                            $iduser = $p['IdUser'];
+                                            $username = $p['username'];
+                                            $nama = $p['nama'];
+                                            $level = $p['level'];
+
+                                            // hitung jumlah
+                                            // $hitungjumlah = mysqli_query($c,"select * from detailpenjualan where
+                                            // PenjualanID='$PenjualanID'");
+
+                                            // $hitungjumlah = mysqli_query($c, "select * from detailpenjualan where
+                                            //  PenjualanID='$PenjualanID'");
+
+
+                                            // $jumlah = mysqli_num_rows($hitungjumlah);
 
                                         ?>
 
                                             <tr>
-                                                <td><?= $i++; ?></td>
-                                                <td><?= $namapelanggan; ?></td>
-                                                <td><?= $notelp; ?></td>
-                                                <td><?= $alamat; ?></td>
-                                                <td>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Edit</button>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-                                                </td>
+                                                <td><?= $iduser ; ?></td>
+                                                <td><?= $username; ?></td>
+                                                <td><?= $nama; ?></td>
+                                                <td><?= $level; ?></td>
+                                                <!-- <td><a href="view.php?idp=<?= $PenjualanID;?>"
+                                                class="btn btn-primary" target="_blank">Tampilkan</a>Delete</td> -->
                                             </tr>
 
                                         <?php
@@ -166,7 +174,6 @@ $h2 = mysqli_num_rows($h1); // jumlah pelanggan
     <script src="js/datatables-simple-demo.js"></script>
 </body>
 
-
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
@@ -174,22 +181,26 @@ $h2 = mysqli_num_rows($h1); // jumlah pelanggan
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Data pelanggan</h4>
+                <h4 class="modal-title">Tambah Pesanan Baru</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form method="post" action="./fungsi/tambahPelanggan.php">
+            <form method="post">
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <input type="text" name="NamaPelanggan" class="from-control" placeholder="Nama Pelanggan">
-                    <input type="num" name="NomorTelepon" class="from-control mt-2" placeholder="No telepon">
-                    <input type="text" name="Alamat" class="from-control mt-2" placeholder="Alamat">
+                    <input type="text" name="NamaProduk" class="from-control" placeholder="Nama Produk">
+                    <input type="text" name="Deskripsi" class="from-control mt-2" placeholder="Deskripsi">
+                    <input type="text" name="Harga" class="from-control mt-2" placeholder="Harga">
+                    <input type="text" name="Stok" class="from-control mt-2" placeholder="Stock">
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" name="tambahpelanggan">Submit</button>
+                    <!-- <button type="submit" class="btn btn-succes" name="tambahpelanggan">Submit</button> -->
+
+                    <button type="submit" class="btn btn-succes" name="tambahuser">Submit</button>
+
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
 
@@ -198,8 +209,6 @@ $h2 = mysqli_num_rows($h1); // jumlah pelanggan
         </div>
     </div>
 </div>
-
-
 
 
 </html>

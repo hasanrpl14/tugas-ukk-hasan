@@ -1,6 +1,26 @@
 <?php
-
+// session_start();
 require 'function.php';
+// include "ceklogin3.php";
+// include "koneksi.php";
+
+
+
+// // Cek apakah pengguna sudah login
+if (!isset($_SESSION['username'])) {
+    // Jika tidak, alihkan ke halaman login
+    // header("Location: login.php");
+    header("Location: login.php?pesan=harus_login");
+
+    // exit(); // Pastikan untuk keluar setelah melakukan pengalihan header
+}
+
+
+
+
+//Hitung jumlah pesanan
+$h1 = mysqli_query($c, "select * from penjualan");
+$h2 = mysqli_num_rows($h1); // jumlah pesanan
 
 ?>
 <!DOCTYPE html>
@@ -46,6 +66,10 @@ require 'function.php';
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Kelola Pelanggan
                         </a>
+                        <a class="nav-link" href="user.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Kelola User
+                        </a>
                         <a class="nav-link" href="logout.php">
                             Logout
                         </a>
@@ -67,11 +91,7 @@ require 'function.php';
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">Primary Card</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
+                                <div class="card-body">Jumlah pesanan: <?=$h2;?></div>
                             </div>
                         </div>
 
@@ -101,30 +121,37 @@ require 'function.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $get = mysqli_query($c, "select * from pesanan p, pelanggan pl where p.idpelanggan=pl.
-                                        idpelanggan");
+                                        $get = mysqli_query($c, "select * from penjualan p, pelanggan pl where p.PelangganID=pl.
+                                        PelangganID");
                                         // ini join table query php menghubungkan table pesanan + table pelanggan
                                       
                                         while ($p = mysqli_fetch_array($get)) {
-                                            $idpesanan = $p['idpesanan'];
-                                            $tanggal = $p['tanggal'];
-                                            $namapelanggan = $p['namapelanggan'];
-                                            $alamat = $p['alamat'];
+                                            $PenjualanID = $p['PenjualanID'];
+                                            $Tanggal = $p['TanggalPenjualan'];
+                                            $NamaPelanggan = $p['NamaPelanggan'];
+                                            $Alamat = $p['Alamat'];
 
                                             // hitung jumlah
-                                            $hitungjumlah = mysqli_query($c,"select * from detailpesanan where
-                                            idpesanan='$idpesanan'");
+                                            // $hitungjumlah = mysqli_query($c,"select * from detailpenjualan where
+                                            // PenjualanID='$PenjualanID'");
+
+                                            $hitungjumlah = mysqli_query($c, "select * from detailpenjualan where
+                                             PenjualanID='$PenjualanID'");
+
+
                                             $jumlah = mysqli_num_rows($hitungjumlah);
 
                                         ?>
 
                                             <tr>
-                                                <td><?= $idpesanan; ?></td>
-                                                <td><?= $tanggal; ?></td>
-                                                <td><?= $namapelanggan; ?> - <?= $alamat; ?></td>
+                                                <td><?= $PenjualanID ; ?></td>
+                                                <td><?= $Tanggal; ?></td>
+                                                <td><?= $NamaPelanggan; ?> - <?= $Alamat; ?></td>
                                                 <td><?= $jumlah; ?></td>
-                                                <td><a href="view.php?idp=<?=$idpesanan;?>"
-                                                class="btn btn-primary" target="_blank">Tampilkan</a>Delete</td>
+                                                <td><a href="view.php?idp=<?= $PenjualanID;?>"
+                                                class="btn btn-primary" target="_blank">Tampilkan</a>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                                </td>
                                             </tr>
 
                                         <?php
@@ -173,24 +200,24 @@ require 'function.php';
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form method="post">
+            <form method="post" action="./fungsi/tambahPesanan.php">
 
                 <!-- Modal body -->
                 <div class="modal-body">
                     Pilih pelanggan
-                    <select name="idpelanggan" class="form-control">
+                    <select name="PelangganID" class="form-control">
 
                         <?php
                         $getpelanggan = mysqli_query($c, "select * from pelanggan");
 
 
                         while($pl = mysqli_fetch_array($getpelanggan)) {
-                             $namapelanggan = $pl['namapelanggan'];
-                             $idpelanggan = $pl['idpelanggan'];
-                             $alamat = $pl['alamat'];
+                             $NamaPelanggan = $pl['NamaPelanggan'];
+                             $PelangganID = $pl['PelangganID'];
+                             $Alamat = $pl['Alamat'];
                         ?>
 
-                            <option value="<?=$idpelanggan;?>"><?=$namapelanggan;?> - <?=$alamat;?></option>
+                            <option value="<?=$PelangganID;?>"><?=$NamaPelanggan;?> - <?=$Alamat;?></option>
 
                         <?php
                         }

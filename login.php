@@ -1,5 +1,13 @@
 <?php
-require 'function.php';
+// require 'function.php';
+// require 'ceklogin3.php';
+
+// if(!isset($_SESSION['login'])){
+//    // sudah login
+// }   else {
+//     // sudah login
+//     header('location:login.php');
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,11 +31,10 @@ require 'function.php';
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        
+                    
                                     
                                     
-                                        
-                                        <form method="post">
+                                        <form method="post" action="proseslogin.php">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddres">Username</label>
                                                 <input class="form-control py-4" id="inputEmailAddres" name="username" type="text" placeholder="Enter username" required />

@@ -1,14 +1,29 @@
 <?php
+include 'koneksi.php';
 
-require 'function.php';
+session_start();
+
+// Cek apakah pengguna sudah login
+if (!isset($_SESSION['username'])) {
+    // Jika tidak, alihkan ke halaman login
+    header("Location: login.php?pesan=harus_login");
+    exit(); // Pastikan untuk keluar setelah melakukan pengalihan header
+}
 
 
 if(isset($_GET['idp'])){
     $idp = $_GET['idp'];
-    $ambilnamapelanggan = mysqli_query($c, "select * from pesanan p, pelanggan pl where p.idpelanggan=pl.idpelanggan and p.idpesanan=$idp");
-    // $ambilnamapelanggan = mysqli_query($ko, "SELECT * FROM pesanan p JOIN pelanggan pl ON p.idpelanggan = pl.idpelanggan WHERE p.idpesanan = $idp");
-    $np = mysqli_fetch_array($ambilnamapelanggan);
-    $namapel = $np['namapelanggan'];
+   
+
+    $ambilnamapelanggan = mysqli_query($c, "SELECT * FROM penjualan p, pelanggan pl WHERE p.PelangganID=pl.PelangganID AND p.PenjualanID=$idp");
+
+if (!$ambilnamapelanggan) {
+    die("Kueri gagal: " . mysqli_error($c));
+}
+
+$np = mysqli_fetch_array($ambilnamapelanggan);
+   $namapel = $np['NamaPelanggan'];
+
 }   else{
     header('Location:index.php');
 }
@@ -104,15 +119,15 @@ if(isset($_GET['idp'])){
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $get = mysqli_query($c, "select * from detailpesanan p, produk pr where p.idproduk=pr.
-                                        idproduk and idpesanan='$idp'");
-                                        // ini join table query php menghubungkan table detailpesanan + table produk
+                                        $get = mysqli_query($c, "select * from detailpenjualan p, produk pr where p.ProdukID=pr.
+                                        ProdukID and PenjualanID='$idp'");
+                                        // ini join table query php menghubungkan table detailpenjualan + table produk
                                       $i = 1;
 
                                         while ($p = mysqli_fetch_array($get)) {
-                                            $qty = $p['qty'];
-                                            $harga = $p['harga'];
-                                            $namaproduk = $p['namaproduk'];
+                                            $qty = $p['JumlahProduk'];
+                                            $harga = $p['Harga'];
+                                            $namaproduk = $p['NamaProduk'];
                                             $subtotal = $qty*$harga;
 
                                         ?>
@@ -123,7 +138,10 @@ if(isset($_GET['idp'])){
                                                 <td>Rp<?=number_format($harga); ?></td>
                                                 <td><?=number_format($qty); ?></td>
                                                 <td>Rp<?=number_format($subtotal); ?></td>
-                                                <td>Tampikann Delete</td>
+                                                <td>
+                                                <button type="submit" class="btn btn-success" name="tambahbarang">Edit</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                                </td>
                                                 <!-- number format berfungsi untuk menformat angka contoh
                                             200000 menjadi seperti ini 200,000 jadi ada komanya -->
                                             </tr>
@@ -174,42 +192,35 @@ if(isset($_GET['idp'])){
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form method="post">
+           <form method="post" action="./fungsi/tambahProduk.php">
+    <!-- Modal body -->
+    <div class="modal-body">
+        Pilih pesanan
+        <select name="ProdukID" class="form-control">
+            <?php
+            $getproduk = mysqli_query($c, "select * from produk where ProdukID not in (select ProdukID from detailpenjualan where PenjualanID='$idp')");
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                    Pilih pesanan
-                    <select name="idproduk" class="form-control">
+            while ($pl = mysqli_fetch_array($getproduk)) {
+                $namaproduk = $pl['NamaProduk'];
+                $deskripsi = $pl['Deskripsi'];
+                $idproduk = $pl['ProdukID'];
+                $stok = $pl['Stok'];
+            ?>
+                <option value="<?= $idproduk; ?>"><?= $namaproduk; ?> - <?= $deskripsi; ?>(Stok: <?=$stok;?>)</option>
+            <?php
+            }
+            ?>
+        </select>
+        <input type="number" name="JumlahProduk" class="form-control mt-4" placeholder="Jumlah" min="1" required>
+        <input type="hidden" name="PenjualanID" value="<?= $idp; ?>">
+    </div>
+    <!-- Modal footer -->
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" name="tambahproduk">Submit</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    </div>
+</form>
 
-                        <?php
-                        $getproduk = mysqli_query($c, "select * from produk where idproduk not in (select idproduk from 
-                        detailpesanan where idpesanan='$idp')");
-
-                        while($pl = mysqli_fetch_array($getproduk)) {
-                             $namaproduk = $pl['namaproduk'];
-                             $stock = $pl['stock'];
-                             $deskripsi = $pl['deskripsi'];
-                             $idproduk = $pl['idproduk'];
-                        ?>
-
-                            <option value="<?=$idproduk;?>"><?=$namaproduk;?> - <?=$deskripsi;?></option>
-
-                        <?php
-                        }
-                        ?>
-
-                    </select>
-                        <input type="number" name="qty" class="form-control mt-4" placeholder="Jumlah">
-                        <input type="hidden" name="idp" value="<?=$idp;?>">
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" name="tambahproduk">Submit</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-
-            </form>
 
         </div>
     </div>

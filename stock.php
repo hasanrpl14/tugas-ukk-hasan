@@ -1,6 +1,11 @@
 <?php
+include 'koneksi.php';
+require 'ceklogin.php';
+// Cek apakah pengguna sudah login
 
-require 'function.php';
+//Hitung jumlah barang
+$h1 = mysqli_query($c, "SELECT * FROM produk");
+$h2 = mysqli_num_rows($h1); // jumlah barang
 
 ?>
 
@@ -61,14 +66,14 @@ require 'function.php';
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Data Pesanan</h1>
+                    <h1 class="mt-4">Data Barang</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Selamat Datang</li>
                     </ol>
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">Jumlah Barang</div>
+                                <div class="card-body">Jumlah Barang : <?=$h2;?></div>
                             </div>
                         </div>
                     </div>
@@ -104,10 +109,10 @@ require 'function.php';
                                         $i = 1; // penomoran
 
                                         while ($p = mysqli_fetch_array($get)) {
-                                            $namaproduk = $p['namaproduk'];
-                                            $deskripsi = $p['deskripsi'];
-                                            $harga = $p['harga'];
-                                            $stock = $p['stock'];
+                                            $namaproduk = $p['NamaProduk'];
+                                            $deskripsi = $p['Deskripsi'];
+                                            $harga = $p['Harga'];
+                                            $stock = $p['Stok'];
 
                                         ?>
 
@@ -115,9 +120,14 @@ require 'function.php';
                                                 <td><?= $i++; ?></td>
                                                 <td><?= $namaproduk; ?></td>
                                                 <td><?= $deskripsi; ?></td>
-                                                <td><?= $harga; ?></td>
+                                                <td>Rp<?=number_format($harga); ?></td>
+                                                <!-- number format berfungsi untuk menformat angka contoh
+                                            200000 menjadi seperti ini 200,000 jadi ada komanya -->
                                                 <td><?= $stock; ?></td>
-                                                <td>Edit Delete</td>
+                                                <td>
+                                                <button type="submit" class="btn btn-success" name="tambahbarang">Edit</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                                </td>
                                             </tr>
 
                                         <?php
@@ -167,22 +177,21 @@ require 'function.php';
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form method="post">
+            <form method="post" action="./fungsi/tambahBarang.php">
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <input type="text" name="namaproduk" class="from-control" placeholder="Nama Produk">
-                    <input type="text" name="deskripsi" class="from-control mt-2" placeholder="Deskripsi">
-                    <input type="text" name="harga" class="from-control mt-2" placeholder="Harga">
-                    <input type="text" name="stock" class="from-control mt-2" placeholder="Stock">
+                    <input type="text" name="NamaProduk" class="from-control" placeholder="Nama Produk">
+                    <input type="text" name="Deskripsi" class="from-control mt-2" placeholder="Deskripsi">
+                    <input type="text" name="Harga" class="from-control mt-2" placeholder="Harga">
+                    <input type="text" name="Stok" class="from-control mt-2" placeholder="Stock">
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <!-- <button type="submit" class="btn btn-succes" name="tambahpelanggan">Submit</button> -->
 
-                    <button type="submit" class="btn btn-succes" name="tambahbarang">Submit</button>
-
+                    <button type="submit" class="btn btn-success" name="tambahbarang">Submit</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
 

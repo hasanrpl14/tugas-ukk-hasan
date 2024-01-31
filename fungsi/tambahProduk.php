@@ -34,7 +34,7 @@ if(isset($_POST['tambahproduk'])){
 
         
         if($insert&&$update){
-            header('location:view.php?idp='.$idp);
+            header('location:../view.php?idp='.$idp);
         } else {
             echo '
             <script>alert("Gagal menambah pesanan baru");

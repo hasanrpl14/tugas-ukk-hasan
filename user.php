@@ -1,7 +1,7 @@
 <?php
 include 'koneksi.php';
 require 'ceklogin.php';
-session_start();
+// session_start();
 
 // Cek apakah pengguna sudah login
 if (!isset($_SESSION['username'])) {

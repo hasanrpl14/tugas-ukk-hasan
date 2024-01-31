@@ -87,49 +87,109 @@ require 'ceklogin.php';
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Produk</th>
-                                            <th>Deskripsi</th>
                                             <th>Jumlah</th>
                                             <th>Tanggal</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                        $get = mysqli_query($c, "SELECT * FROM masuk m, produk p WHERE m.ProdukID = p.ProdukID");
 
-                                    
+                                        if ($get === false) {
+                                            // Handle error here, print or log the error message
+                                            echo "Error: " . mysqli_error($c);
+                                        } else {
+                                            $i = 1; // penomoran
 
-<?php
-    $get = mysqli_query($c, "SELECT * FROM masuk m, produk p WHERE m.ProdukID = p.ProdukID");
+                                            while ($p = mysqli_fetch_array($get)) {
+                                                $idmasuk = $p['IDMasuk'];
+                                                $idproduk = $p['ProdukID'];
+                                                $namaproduk = $p['NamaProduk'];
+                                                $deskripsi = $p['Deskripsi'];
+                                                $qty = $p['JumlahProduk'];
+                                                $tanggal = $p['TanggalMasuk'];
 
-    if ($get === false) {
-        // Handle error here, print or log the error message
-        echo "Error: " . mysqli_error($c);
-    } else {
-        $i = 1; // penomoran
+                                                ?>
+                                                <tr>
+                                                    <td><?= $i++; ?></td>
+                                                    <td><?= $namaproduk; ?>: <?= $deskripsi; ?></td>
+                                                    <td><?= $qty; ?></td>
+                                                    <td><?= $tanggal; ?></td>
+                                                    <td>
+                                                      <!-- Button to Open the Modal edit barang masuk-->
+                                                    <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#editbarangmasuk<?=$idmasuk?>">
+                                                        Edit
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete<?=$idmasuk;?>">
+                                                        Hapus 
+                                                    </button>
+                                                    </td>
+                                                </tr>
 
-        while ($p = mysqli_fetch_array($get)) {
-            $namaproduk = $p['NamaProduk'];
-            $deskripsi = $p['Deskripsi'];
-            $qty = $p['JumlahProduk'];
-            $tanggal = $p['TanggalMasuk'];
+                                            <!-- The Modal alert edit barang masuk-->
+                                            <div class="modal fade" id="editbarangmasuk<?=$idmasuk?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
 
-            ?>
-            <tr>
-                <td><?= $i++; ?></td>
-                <td><?= $namaproduk; ?></td>
-                <td><?= $deskripsi; ?></td>
-                <td><?= $qty; ?></td>
-                <td><?= $tanggal; ?></td>
-                <td>
-                <button type="submit" class="btn btn-success" name="tambahbarang">Edit</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-                </td>
-            </tr>
-            <?php
-        }
-    }
-?>
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Ubah Barang Masuk</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
 
+                                                        <form method="post" action="./fungsi/editBarangMasuk.php">
 
+                                                            <!-- Modal body -->
+                                                            <div class="modal-body">
+                                                                <input type="text" name="NamaProduk" class="form-control" placeholder="Nama Produk" value="<?= $namaproduk; ?> : <?= $deskripsi; ?>" disabled>
+                                                                <input type="number" name="qty" class="form-control mt-2" placeholder="qty" value="<?= $qty; ?>">
+                                                                <input type="hidden" name="idm" class="form-control mt-2" value="<?=$idmasuk?>">
+                                                                <input type="hidden" name="idp" class="form-control mt-2" value="<?=$idproduk?>">
+                                                            </div>
+
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="editdatabarangmasuk">Submit</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- The Modal delete barang masuk--> 
+                                            <div class="modal fade" id="delete<?=$idmasuk;?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Apakah Anda Yakin ingin menghapus Data Barang Masuk?</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+
+                                                        <!-- Modal Body -->
+                                                        <form method="post" action="./fungsi/hapusBarangMasuk.php">
+                                                            <div class="modal-body">
+                                                                Hapus data ini
+                                                                <input type="hidden" name="idp" value="<?=$idproduk?>">
+                                                                <input type="hidden" name="idm" value="<?=$idmasuk?>">
+                                                            </div>
+
+                                                            <!-- Modal Footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="hapusdatabarangmasuk">Ya</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                                <?php
+                                            }
+                                        }
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>

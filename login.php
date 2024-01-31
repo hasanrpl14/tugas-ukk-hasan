@@ -33,7 +33,6 @@
                                     <div class="card-body">
                     
                                     
-                                    
                                         <form method="post" action="proseslogin.php">
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddres">Username</label>
@@ -47,8 +46,6 @@
                                                 <button type="submid" name="login" class="btn btn-primary">Login</button>
                                             </div>
                                         </form>
-                                   
-                                   
                                    
                                    
                                    

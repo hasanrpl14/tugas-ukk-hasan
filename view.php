@@ -125,31 +125,66 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                       $i = 1;
 
                                         while ($p = mysqli_fetch_array($get)) {
+                                            $idpr = $p['ProdukID'];
+                                            $iddp = $p['DetailID'];
+                                            // $idp = $p['PenjualanID'];
                                             $qty = $p['JumlahProduk'];
                                             $harga = $p['Harga'];
                                             $namaproduk = $p['NamaProduk'];
+                                            $desk = $p['Deskripsi'];
                                             $subtotal = $qty*$harga;
 
                                         ?>
 
                                             <tr>
                                                 <td><?= $i++; ?></td>
-                                                <td><?= $namaproduk; ?></td>
+                                                <td><?= $namaproduk; ?> (<?=$desk; ?>) </td>
                                                 <td>Rp<?=number_format($harga); ?></td>
                                                 <td><?=number_format($qty); ?></td>
                                                 <td>Rp<?=number_format($subtotal); ?></td>
-                                                <td>
-                                                <button type="submit" class="btn btn-success" name="tambahbarang">Edit</button>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-                                                </td>
-                                                <!-- number format berfungsi untuk menformat angka contoh
-                                            200000 menjadi seperti ini 200,000 jadi ada komanya -->
-                                            </tr>
+                                             <td>
+                                            <button type="submit" class="btn btn-success" name="tambahbarang">Edit</button>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idpr;?>">
+                                                            Hapus 
+                                            </button>
+                                        </td>
+                                    </tr>
 
-                                        <?php
-                                        }; //end of white
+<!-- The Modal delete detailpesanan --> 
+<div class="modal fade" id="delete<?=$idpr;?>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Apakah Anda Yakin ingin menghapus barang ini?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
-                                        ?>
+            <!-- Modal Body -->
+            <form method="post" action="./fungsi/hapusProdukpesanan.php">
+                <div class="modal-body">
+                    Hapus Barang ini
+                    <input type="hidden" name="idp" value="<?= $iddp; ?>">
+                    <input type="hidden" name="idpr" value="<?= $idpr; ?>">
+                    <input type="hidden" name="idorder" value="<?= $idp; ?>">
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" name="hapusprodukpesanan">Ya</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php
+// Ditutupi dengan komentar, saya asumsikan ada kode tambahan di sini
+// Jika tidak, Anda bisa menghapus komentar ini dan sebelumnya.
+};
+// End of white
+?>
 
                                     </tbody>
                                 </table>

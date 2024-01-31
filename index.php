@@ -4,8 +4,6 @@ require 'function.php';
 // include "ceklogin3.php";
 // include "koneksi.php";
 
-
-
 // // Cek apakah pengguna sudah login
 if (!isset($_SESSION['username'])) {
     // Jika tidak, alihkan ke halaman login
@@ -14,9 +12,6 @@ if (!isset($_SESSION['username'])) {
 
     // exit(); // Pastikan untuk keluar setelah melakukan pengalihan header
 }
-
-
-
 
 //Hitung jumlah pesanan
 $h1 = mysqli_query($c, "select * from penjualan");

@@ -139,15 +139,46 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
                                         ?>
 
                                             <tr>
-                                                <td><?= $PenjualanID ; ?></td>
+                                                <td><?= $PenjualanID; ?></td>
                                                 <td><?= $Tanggal; ?></td>
                                                 <td><?= $NamaPelanggan; ?> - <?= $Alamat; ?></td>
                                                 <td><?= $jumlah; ?></td>
-                                                <td><a href="view.php?idp=<?= $PenjualanID;?>"
-                                                class="btn btn-primary" target="_blank">Tampilkan</a>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                                <td>
+                                                    <a href="view.php?idp=<?= $PenjualanID;?>"
+                                                    class="btn btn-primary mb-2" target="_blank">Tampilkan</a>
+                                                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete<?=$PenjualanID;?>">
+                                                        Hapus 
+                                                    </button>
                                                 </td>
                                             </tr>
+
+                                            <!-- The Modal delete data pesanan/order--> 
+                                            <div class="modal fade" id="delete<?=$PenjualanID;?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Apakah Anda Yakin ingin menghapus Data Pesanan?</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+
+                                                        <!-- Modal Body -->
+                                                        <form method="post" action="./fungsi/hapusPesanan.php">
+                                                            <div class="modal-body">
+                                                                Hapus data Pesanan
+                                                                <input type="hidden" name="ido" value="<?=$PenjualanID;?>">
+                                                                <input type="hidden" name="idm" value="<?=$idmasuk?>">
+                                                            </div>
+
+                                                            <!-- Modal Footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="hapusdatapesanan">Ya</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         <?php
                                         }; //end of white

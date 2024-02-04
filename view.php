@@ -27,6 +27,8 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
 }   else{
     header('Location:index.php');
 }
+
+
 // validasi if di atas jika tidak ada url view.php?idp=1 
 // intinya jika di urlnya tidak ada id pesanan maka akan kembali ke halaman index
 
@@ -142,49 +144,84 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                                 <td>Rp<?=number_format($harga); ?></td>
                                                 <td><?=number_format($qty); ?></td>
                                                 <td>Rp<?=number_format($subtotal); ?></td>
-                                             <td>
-                                            <button type="submit" class="btn btn-success" name="tambahbarang">Edit</button>
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idpr;?>">
-                                                            Hapus 
-                                            </button>
-                                        </td>
-                                    </tr>
+                                                <td>
+                                                    <!-- Button to Open the Modal edit detail pesanan-->
+                                                    <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#editdetailpesanan<?=$idpr?>">
+                                                        Edit
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete<?=$idpr;?>">
+                                                        Hapus 
+                                                    </button>
+                                                </td>
+                                            </tr>
 
-<!-- The Modal delete detailpesanan --> 
-<div class="modal fade" id="delete<?=$idpr;?>">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Apakah Anda Yakin ingin menghapus barang ini?</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
+                                    <!-- The Modal alert edit detail pesanan/penjualan-->
+                                    <div class="modal fade" id="editdetailpesanan<?=$idpr?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
 
-            <!-- Modal Body -->
-            <form method="post" action="./fungsi/hapusProdukpesanan.php">
-                <div class="modal-body">
-                    Hapus Barang ini
-                    <input type="hidden" name="idp" value="<?= $iddp; ?>">
-                    <input type="hidden" name="idpr" value="<?= $idpr; ?>">
-                    <input type="hidden" name="idorder" value="<?= $idp; ?>">
-                </div>
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Ubah Data Detail Pesanan</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
 
-                <!-- Modal Footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" name="hapusprodukpesanan">Ya</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+                                                        <form method="post" action="./fungsi/editDetailPesanan.php">
 
-<?php
-// Ditutupi dengan komentar, saya asumsikan ada kode tambahan di sini
-// Jika tidak, Anda bisa menghapus komentar ini dan sebelumnya.
-};
-// End of white
-?>
+                                                            <!-- Modal body -->
+                                                            <div class="modal-body">
+                                                                <input type="text" name="NamaProduk" class="form-control" placeholder="Nama Produk" value="<?= $namaproduk; ?>" disabled>
+                                                                <input type="number" name="qty" class="form-control mt-2" placeholder="Harga" value="<?= $qty; ?>">
+                                                                <input type="hidden" name="iddp" class="form-control mt-2" value="<?=$iddp?>">
+                                                                <input type="hidden" name="idp" class="form-control mt-2" value="<?=$idp?>">
+                                                                <input type="hidden" name="idpr" class="form-control mt-2" value="<?=$idpr?>">
+                                                            </div>
+
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="editdetailpesanan">Submit</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                    <!-- The Modal delete detailpesanan --> 
+                                    <div class="modal fade" id="delete<?=$idpr;?>">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Apakah Anda Yakin ingin menghapus barang ini?</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+
+                                                <!-- Modal Body -->
+                                                <form method="post" action="./fungsi/hapusProdukpesanan.php">
+                                                    <div class="modal-body">
+                                                        Hapus Barang ini
+                                                        <input type="hidden" name="idp" value="<?= $iddp; ?>">
+                                                        <input type="hidden" name="idpr" value="<?= $idpr; ?>">
+                                                        <input type="hidden" name="idorder" value="<?= $idp; ?>">
+                                                    </div>
+
+                                                    <!-- Modal Footer -->
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success" name="hapusprodukpesanan">Ya</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <?php
+                                    // Ditutupi dengan komentar, saya asumsikan ada kode tambahan di sini
+                                    // Jika tidak, Anda bisa menghapus komentar ini dan sebelumnya.
+                                    };
+                                    // End of white
+                                    ?>
 
                                     </tbody>
                                 </table>

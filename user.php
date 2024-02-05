@@ -87,13 +87,13 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
 
                     <!-- Button to Open the Modal -->
                     <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
-                        Tambah Pesanan Baru
+                        Tambah User
                     </button>
 
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Data Pesanan
+                            Data User
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -116,6 +116,7 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
                                             $iduser = $p['IdUser'];
                                             $username = $p['username'];
                                             $nama = $p['nama'];
+                                            $password = $p['password'];
                                             $level = $p['level'];
 
                                             // hitung jumlah
@@ -135,9 +136,90 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
                                                 <td><?= $username; ?></td>
                                                 <td><?= $nama; ?></td>
                                                 <td><?= $level; ?></td>
-                                                <!-- <td><a href="view.php?idp=<?= $PenjualanID;?>"
-                                                class="btn btn-primary" target="_blank">Tampilkan</a>Delete</td> -->
+                                                <td>
+                                                    <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#edituser<?=$iduser ?>">
+                                                        Edit
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete<?=$iduser ?>">
+                                                         Hapus 
+                                                    </button>
+                                                </td>
                                             </tr>
+
+                                               <!-- The Modal alert edit pelanggan-->
+                                               <div class="modal fade" id="edituser<?=$iduser ?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Ubah Data User</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+
+                                                        <form method="post" action="./fungsi/editUser.php">
+
+                                                            <!-- Modal body -->
+                                                            <div class="modal-body">
+                                                                <input type="text" name="NamaUser" class="form-control" placeholder="Nama Pelanggan" value="<?= $username; ?>">
+                                                                <input type="text" name="Nama" class="form-control mt-2" placeholder="No Telepon" value="<?= $nama; ?>">
+                                                                <input type="text" name="Password" class="form-control mt-2" placeholder="Alamat" value="<?= $password; ?>">
+                                                                <label for="level">Pilih Level</label>
+                                                                    <select name="level" class="form-control">
+                                                                        <?php
+                                                                        $getlevel = mysqli_query($c, "SELECT DISTINCT level FROM user WHERE level IN ('admin', 'petugas')");
+                                                                        if (!$getlevel) {
+                                                                            die("Error in SQL query: " . mysqli_error($c));
+                                                                        }
+
+                                                                        while ($pl = mysqli_fetch_array($getlevel)) {
+                                                                            $level = $pl['level'];
+                                                                        ?>
+                                                                            <option value="<?= $level; ?>"><?= $level; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+               
+                                                                <input type="hidden" name="iduser" class="form-control mt-2" value="<?= $iduser;?>">
+                                                            </div>
+
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="editbarang">Submit</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- The Modal delete detailpesanan --> 
+                                            <div class="modal fade" id="delete<?=$iduser ?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Apakah Anda Yakin ingin menghapus <?= $namapelanggan; ?>?</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+
+                                                        <!-- Modal Body -->
+                                                        <form method="post" action="./fungsi/hapusPelanggan.php">
+                                                            <div class="modal-body">
+                                                                Hapus ini
+                                                                <input type="hidden" name="idpl" value="<?=$idpelanggan?>">
+                                                            </div>
+
+                                                            <!-- Modal Footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="hapuspelanggam">Ya</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         <?php
                                         }; //end of white
@@ -181,18 +263,35 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Pesanan Baru</h4>
+                <h4 class="modal-title">Tambah User Baru</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form method="post">
+            <form method="post" action="./fungsi/tambahUser.php">
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <input type="text" name="NamaProduk" class="from-control" placeholder="Nama Produk">
-                    <input type="text" name="Deskripsi" class="from-control mt-2" placeholder="Deskripsi">
-                    <input type="text" name="Harga" class="from-control mt-2" placeholder="Harga">
-                    <input type="text" name="Stok" class="from-control mt-2" placeholder="Stock">
+                    <input type="hidden" name="IDUser" class="form-control" placeholder="Username">
+                    <input type="text" name="NamaUser" class="form-control" placeholder="Username">
+                    <input type="text" name="Nama" class="form-control mt-2" placeholder="Nama">
+                    <input type="text" name="Password" class="form-control mt-2" placeholder="Password">          
+
+                    <label for="level">Pilih Level</label>
+                        <select name="level" class="form-control">
+                            <?php
+                            $getlevel = mysqli_query($c, "SELECT DISTINCT level FROM user WHERE level IN ('admin', 'petugas')");
+                            if (!$getlevel) {
+                                die("Error in SQL query: " . mysqli_error($c));
+                            }
+
+                            while ($pl = mysqli_fetch_array($getlevel)) {
+                                $level = $pl['level'];
+                            ?>
+                                <option value="<?= $level; ?>"><?= $level; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                 </div>
 
                 <!-- Modal footer -->

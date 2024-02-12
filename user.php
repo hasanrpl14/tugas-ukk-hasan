@@ -180,7 +180,14 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
                                                                         }
                                                                         ?>
                                                                     </select>
-               
+
+                                                                    <!-- <label for="level">Pilih level</label>
+
+                                                                    <select id="level" name="level">
+                                                                    <option value="admin">Admin</option>
+                                                                    <option value="petugas">Petugas</option>
+                                                                    </select>
+                                                                                 -->
                                                                 <input type="hidden" name="iduser" class="form-control mt-2" value="<?= $iduser;?>">
                                                             </div>
 
@@ -200,20 +207,20 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
                                                     <div class="modal-content">
                                                         <!-- Modal Header -->
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Apakah Anda Yakin ingin menghapus <?= $namapelanggan; ?>?</h4>
+                                                            <h4 class="modal-title">Apakah Anda Yakin ingin menghapus <?= $username; ?>?</h4>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                         </div>
 
                                                         <!-- Modal Body -->
-                                                        <form method="post" action="./fungsi/hapusPelanggan.php">
+                                                        <form method="post" action="./fungsi/hapusUser.php">
                                                             <div class="modal-body">
                                                                 Hapus ini
-                                                                <input type="hidden" name="idpl" value="<?=$idpelanggan?>">
+                                                                <input type="hidden" name="iduser" value="<?=$iduser?>">
                                                             </div>
 
                                                             <!-- Modal Footer -->
                                                             <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-success" name="hapuspelanggam">Ya</button>
+                                                                <button type="submit" class="btn btn-success" name="hapususer">Ya</button>
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                             </div>
                                                         </form>

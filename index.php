@@ -111,6 +111,7 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
                                             <th>Tanggal</th>
                                             <th>Nama Pelanggan</th>
                                             <th>Jumlah</th>
+                                            <th>Total Pembayaran</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -125,6 +126,7 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
                                             $Tanggal = $p['TanggalPenjualan'];
                                             $NamaPelanggan = $p['NamaPelanggan'];
                                             $Alamat = $p['Alamat'];
+                                            $totalHarga = $p['TotalHarga'];
 
                                             // hitung jumlah
                                             // $hitungjumlah = mysqli_query($c,"select * from detailpenjualan where
@@ -143,6 +145,7 @@ $h2 = mysqli_num_rows($h1); // jumlah pesanan
                                                 <td><?= $Tanggal; ?></td>
                                                 <td><?= $NamaPelanggan; ?> - <?= $Alamat; ?></td>
                                                 <td><?= $jumlah; ?></td>
+                                                <td><?= $totalHarga; ?></td>
                                                 <td>
                                                     <a href="view.php?idp=<?= $PenjualanID;?>"
                                                     class="btn btn-primary mb-2" target="_blank">Tampilkan</a>

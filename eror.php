@@ -37,3 +37,21 @@
                                         }; //end of white
 
                                         ?>
+
+
+
+<label for="level">Pilih Level</label>
+                                                                    <select name="level" class="form-control">
+                                                                        <?php
+                                                                        $getlevel = mysqli_query($c, "SELECT DISTINCT level FROM user WHERE level IN ('admin', 'petugas')");
+                                                                        if (!$getlevel) {
+                                                                            die("Error in SQL query: " . mysqli_error($c));
+                                                                        }
+
+                                                                        while ($pl = mysqli_fetch_array($getlevel)) {
+                                                                            $level = $pl['level'];
+                                                                        ?>
+                                                                            <option value="<?= $level; ?>"><?= $level; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>

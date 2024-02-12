@@ -23,6 +23,7 @@ if (!$ambilnamapelanggan) {
 
 $np = mysqli_fetch_array($ambilnamapelanggan);
    $namapel = $np['NamaPelanggan'];
+   $idpel = $np['PelangganID'];
 
 }   else{
     header('Location:index.php');
@@ -134,7 +135,8 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                             $harga = $p['Harga'];
                                             $namaproduk = $p['NamaProduk'];
                                             $desk = $p['Deskripsi'];
-                                            $subtotal = $qty*$harga;
+                                            $subtotal = $p['Subtotal'];
+                                            // $subtotal = $qty*$harga;
 
                                         ?>
 
@@ -146,6 +148,9 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                                 <td>Rp<?=number_format($subtotal); ?></td>
                                                 <td>
                                                     <!-- Button to Open the Modal edit detail pesanan-->
+                                                    <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#prosesdetailpesanan<?=$idpr?>">
+                                                        Proses
+                                                    </button>
                                                     <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#editdetailpesanan<?=$idpr?>">
                                                         Edit
                                                     </button>
@@ -155,6 +160,42 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                                 </td>
                                             </tr>
 
+                                    <!-- The Modal alert proses bayar detail pesanan/penjualan-->
+                                    <div class="modal fade" id="prosesdetailpesanan<?=$idpr?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Bayar Detail Pesanan</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+
+                                                        <form method="post" action="./fungsi/prosesPembayaran.php">
+
+                                                            <!-- Modal body -->
+                                                            <div class="modal-body">
+                                                                <label for="">Nama Produk</label>
+                                                                <input type="text" name="NamaProduk" class="form-control" placeholder="Nama Produk" value="<?= $namaproduk; ?>" disabled>
+                                                                <label for="qty">Jumlah Beli</label>
+                                                                <input type="number" name="qty" class="form-control mt-2" placeholder="Jumlah Beli" value="<?= $qty; ?>" readonly>
+                                                                <input type="hidden" name="iddp" class="form-control mt-2" value="<?=$iddp?>">
+                                                                <input type="hidden" name="idp" class="form-control mt-2" value="<?=$idp?>">
+                                                                <input type="hidden" name="idpr" class="form-control mt-2" value="<?=$idpr?>">
+                                                                <input type="hidden" name="harga" class="form-control mt-2" value="<?=$harga?>">
+                                                                <input type="hidden" name="subtotal" class="form-control mt-2" value="<?=$subtotal?>">
+                                                                <input type="hidden" name="idpel" class="form-control mt-2" value="<?=$idpel?>">
+                                                            </div>
+
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="prosesdetailpesanan">Submit</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     <!-- The Modal alert edit detail pesanan/penjualan-->
                                     <div class="modal fade" id="editdetailpesanan<?=$idpr?>">
                                                 <div class="modal-dialog">
@@ -225,6 +266,49 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
 
                                     </tbody>
                                 </table>
+
+                                <?php   
+                                         $get = mysqli_query($c, "SELECT * FROM penjualan");
+                                            while ($p = mysqli_fetch_array($get)) {
+                                                $totalHarga = $p['TotalHarga'];
+                                                // Lakukan sesuatu dengan $totalHarga
+                                            }
+                                ?>
+        
+                                    <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="total harga" 
+                                    value="Rp<?= number_format($totalHarga); ?>">
+                                    <label for="floatingInput">Total Pembelian</label>
+                                                  <!-- Button to Open the Modal -->
+                                        <button type="button" class="btn btn-outline-info mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
+                                            Simpan Total Harga / Pembelian
+                                        </button>
+
+                                        <form method="post" action="./fungsi/simpan_Totalpembayaran.php">
+                                            <?php 
+                                            include '../koneksi.php';
+                                            $detailpenjualan = mysqli_query($koneksi, "SELECT SUM(Subtotal) AS TotalHarga FROM detailpenjualan WHERE 	PenjualanID='$d[PenjualanID]'"); 
+                                            $row = mysqli_fetch_assoc($detailpenjualan); 
+                                            $sum = $row['TotalHarga'];
+                                            ?>
+                                            <div class="row">
+                                                <div class="col-sm-10">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="TotalHarga" value="<?php echo $sum; ?>">
+                                                        <input type="text" name="PelangganID" value="<?php echo $d['PelangganID']; ?>" hidden>
+                                                        <input type="text" name="PenjualanID" value="<?php echo $d['PenjualanID']; ?>" hidden>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <button class="btn btn-info btn-sm form-control" type="submit">Simpan</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                    
                             </div>
                         </div>
                     </div>

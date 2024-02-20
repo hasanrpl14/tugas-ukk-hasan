@@ -1,39 +1,3 @@
-<?php  
-session_start();
-require 'koneksi.php';
-// require '../fungsi/rupiah.php';
-
-if(isset($_GET['idp'])){
-    $idp = $_GET['idp'];
-
-    $ambilnamapelanggan = mysqli_query($c, "SELECT * FROM penjualan p, pelanggan pl WHERE p.PelangganID=pl.PelangganID AND p.PenjualanID=$idp");
-
-if (!$ambilnamapelanggan) {
-    die("Kueri gagal ambil nama: " . mysqli_error($c));
-}
-
-$np = mysqli_fetch_array($ambilnamapelanggan);
-   $namapel = $np['NamaPelanggan'];
-   $idpel = $np['PelangganID'];
-
-}   else{
-    header('Location:index.php');
-}
-
-// $id = $_GET['id_order'];
-// $q_struk = mysqli_query($kon, "SELECT * FROM tb_transaksi WHERE id_order = '$id'");
-// $struk = mysqli_fetch_assoc($q_struk);
-// $q_mem = mysqli_query($kon, "SELECT * FROM tb_user WHERE id_user = '$struk[id_user]'");
-// $mem = mysqli_fetch_assoc($q_mem);
-// $detail_order = mysqli_query($kon, "SELECT * FROM tb_detail_order WHERE id_order  = '$id'");
-// $q_hartot = mysqli_query($kon, "SELECT sum(hartot_dorder) as hartot FROM tb_detail_order WHERE id_order = '$id'");
-// $hartot = mysqli_fetch_assoc($q_hartot);
-
-
-
-                                      
-                                        ?>
-
 <html>
 <head>
 <title>Kasir Ukk Hasan</title>
@@ -54,10 +18,10 @@ border: 1px solid black;
 <body style='font-family:tahoma; font-size:8pt;'>
 <center><table style='width:350px; font-size:16pt; font-family:calibri; border-collapse: collapse;' border = '0'>
 <td width='70%' align='CENTER' vertical-align:top'><span style='color:black;'>
-<b>UKK KASIR 2024</b></br>12 PPLG 1 HASAN</span></br>
+<b>UKK KASIR 2024</b></br>SMK NU 01 KENDAL</span></br>
  
  
-<span style='font-size:12pt'>No. : xxxxx, 11 Juni 2020 (user:xxxxx), 11:57:50</span></br>
+<span style='font-size:12pt'>No. : xxxxx, 11 Juni 2020 (user:HASAN), 11:57:50</span></br>
 </td>
 </table>
 <style>
@@ -74,7 +38,8 @@ hr {
 <table cellspacing='0' cellpadding='0' style='width:350px; font-size:12pt; font-family:calibri;  border-collapse: collapse;' border='0'>
  
 <tr align='center'>
-<td width='10%'>Nama Pelanggan</td>
+
+<!-- <td width='10%'>Nama Pelanggan</td> -->
 <td width='10%'>Item</td>
 <td width='13%'>Price</td>
 <td width='4%'>Qty</td>
@@ -82,7 +47,8 @@ hr {
 <td width='13%'>Total</td><tr>
 <td colspan='5'><hr></td></tr>
 </tr>
-<tr><td style='vertical-align:top'> <?= $namapel?></td>
+<tr>
+    <!-- <td style='vertical-align:top'>Hasan</td> -->
 <td style='vertical-align:top'>3 WAY STOPCOCK</td>
 <td style='vertical-align:top; text-align:right; padding-right:10px'>7.440</td>
 <td style='vertical-align:top; text-align:right; padding-right:10px'>100</td>

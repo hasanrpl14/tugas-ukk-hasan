@@ -43,7 +43,9 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> -->
+    <link rel="icon" href="assets/images/kasir-logo.png" type="image/x-icon">
 
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -413,7 +415,7 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

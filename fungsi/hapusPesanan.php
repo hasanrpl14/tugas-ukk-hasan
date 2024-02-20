@@ -25,27 +25,16 @@ if(isset($_POST)){
 
         //hapus data
         $querydelete = mysqli_query($c, "DELETE FROM detailpenjualan WHERE DetailID='$iddp'"); // stok
-        
-
-
-
-
-        //redirect
     }
 
     $query= mysqli_query($c, "DELETE FROM penjualan WHERE PenjualanID='$ido'");// hapus
-    $hapus = mysqli_query($c, "DELETE FROM detailpenjualan WHERE ProdukID='$idpr' AND DetailID='$idp'");// hapus
-
-
 
     if($queryupdate && $querydelete && $query){
-        // header('location:../view.php?idp='.$idp);
-        header('location:../index.php');
-
+        header('location:../order.php');
     } else {
         echo '
-        <script>alert("gagal hapus barang");
-        window.location.href="../index.php"
+        <script>alert("gagal hapus pesanan");
+        window.location.href="../order.php"
         </script>
         ';
     }

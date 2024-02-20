@@ -13,6 +13,8 @@ $password = ($_POST['password']);
 
 // menyeleksi data user dengan username dan password yang sesuai
 $login = mysqli_query($c,"select * from user where username='$username' and password='$password'");
+// $login = mysqli_query($c, "SELECT * FROM user WHERE username='$username' AND password='$password' AND nama='$nama'");
+
 // menghitung jumlah data yang ditemukan
 $cek = mysqli_num_rows($login);
 
@@ -26,23 +28,21 @@ if($cek > 0){
 
 		// buat session login dan username
 		$_SESSION['username'] = $username;
+		// $_SESSION['nama'] = $username;
 		$_SESSION['level'] = "admin";
+		// $_SESSION['level'] = "petugas";
 		// alihkan ke halaman dashboard admin
 		// header("location:test.html");
 		header("location:index.php");
-	}else{
-
-		// alihkan ke halaman login kembali
-		// header("location:index.php?pesan=gagal");
-        // echo '
-        // <script>alert("Username / level salah");
-        // window.location.href="login.php"
-        // </script>
-        // ';
-
-        echo '<script>alert("Username / level salah"); window.location.href="login.php";</script>';
-
-	}	
+	} elseif ($data['level']== "petugas") {
+		$_SESSION['username'] = $username;
+		$_SESSION['level'] = "petugas";
+		// $_SESSION['level'] = "petugas";
+		// alihkan ke halaman dashboard admin
+		// header("location:test.html");
+		header("location:index.php");
+		
+	}
 }else{
 	// header("location:index.php?pesan=gagal");
     // echo '

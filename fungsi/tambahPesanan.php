@@ -12,13 +12,13 @@ if(isset($_POST['tambahpesanan'])){
     if($insert){
         echo '
         <script>alert("Berhasil menambah pesanan baru");
-        window.location.href="../index.php"
+        window.location.href="../order.php"
         </script>
         ';
     } else {
         echo '
         <script>alert("Gagal menambah pesanan baru");
-        window.location.href="index.php"
+        window.location.href="order.php"
         </script>
         ';
     }

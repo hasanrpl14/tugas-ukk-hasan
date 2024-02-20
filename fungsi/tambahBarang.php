@@ -13,13 +13,13 @@ if(isset($_POST['tambahbarang'])){
     if($insert){
         echo '
         <script>alert("Berhasil menambah barang");
-        window.location.href="../stock.php"
+        window.location.href="../stok.php"
         </script>
         ';
     } else {
         echo '
         <script>alert("Gagal menambah barang baru");
-        window.location.href="stock.php"
+        window.location.href="stok.php"
         </script>
         ';
     }

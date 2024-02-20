@@ -14,12 +14,12 @@ if(isset($_POST)){
 
     if($update){
         // header('location:../view.php?idp='.$idp);
-        header('location:../stock.php');
+        header('location:../stok.php');
 
     } else {
         echo '
         <script>alert("gagal edit barang");
-        window.location.href="../stock.php"
+        window.location.href="../stok.php"
         </script>
         ';
     }

@@ -11,12 +11,12 @@ if(isset($_POST)){
 
     if($hapus){
         // header('location:../view.php?idp='.$idp);
-        header('location:../stock.php');
+        header('location:../stok.php');
 
     } else {
         echo '
         <script>alert("gagal hapus barang");
-        window.location.href="../stock.php"
+        window.location.href="../stok.php"
         </script>
         ';
     }

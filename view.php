@@ -193,8 +193,8 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                         <th>No</th>
                                         <th>Nama Produk</th>
                                         <th>Harga Satuan</th>
-                                        <th>Jumlah</th>
-                                        <th>Sub-total</th>
+                                        <th>Jumlah Beli</th>
+                                        <th>Total Harga</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -222,18 +222,30 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                                 <td><?= $i++; ?></td>
                                                 <td><?= $namaproduk; ?> (<?=$desk; ?>) </td>
                                                 <td>Rp<?=number_format($harga); ?></td>
-                                                <td><?=number_format($qty); ?></td>
+                                                <td>
+                                                    <input type="number" class="form-control" value="<?=$qty;?>">
+                                                </td>
                                                 <td>Rp<?=number_format($subtotal); ?></td>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#prosesdetailpesanan<?=$iddp?>">
-                                                        Proses 
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#editdetailpesanan<?=$idpr?>">
-                                                        Edit 
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete<?=$idpr;?>">
+                                                <form method="post" action="./fungsi/prosesPembayaran.php">
+                                                <button type="submit" class="btn btn-primary" name="prosesdetailpesanan">Proses </button>
+                                                    <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#delete<?=$idpr;?>">
                                                         Hapus 
                                                     </button>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="NamaProduk" class="form-control" placeholder="Nama Produk" value="<?= $namaproduk; ?>">
+                                                    <input type="hidden" name="qty" class="form-control " placeholder="Jumlah Beli" value="<?= $qty; ?>">
+                                                    <input type="hidden" name="iddp" class="form-control " value="<?=$iddp?>">
+                                                    <input type="hidden" name="idp" class="form-control " value="<?=$idp?>">
+                                                    <input type="hidden" name="idpr" class="form-control " value="<?=$idpr?>">
+                                                    <input type="hidden" name="harga" class="form-control " value="<?=$harga?>">
+                                                    <input type="hidden" name="subtotal" class="form-control " value="<?=$subtotal?>">
+                                                    <input type="hidden" name="idpel" class="form-control " value="<?=$idpel?>">
+                                                    
+                                                </div>
+                                                
+                                            </form>
+                                                    
                                                 </td>
                                             </tr>
 

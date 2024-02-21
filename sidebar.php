@@ -42,6 +42,7 @@ $hasil = mysqli_fetch_array($query);
 					</li>
 					<li class="nav-item pcoded-hasmenu">
 					    <a href="order.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Order</span></a>
+					    <a href="order2.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Order 2</span></a>
 					</li>
 					<?php
                         // Cek apakah pengguna telah login

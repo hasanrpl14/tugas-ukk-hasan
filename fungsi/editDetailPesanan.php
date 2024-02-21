@@ -23,6 +23,7 @@ if(isset($_POST['editdetailpesanan'])){
     if($qty >= $qtysekarang){
         //kalau inputan lebih besar daripada jumlah produk(qty) yang tercatat
         //hitung selisih
+        
         $selisih = $qty-$qtysekarang;
         $newstock = $stocksekarang-$selisih;
 

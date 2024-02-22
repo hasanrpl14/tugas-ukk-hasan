@@ -43,7 +43,9 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> -->
+    <link rel="icon" href="assets/images/kasir-logo.png" type="image/x-icon">
 
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -95,7 +97,8 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Data Pesanan : <?=$idpel;?></h5>
+                            <h5 class="m-b-10">Data Pesanan : <?=$idp;?></h5>
+                            <h5 class="m-b-10">Data Pelanggan : <?=$idpel;?></h5>
                             <h5 class="m-b-10">Data Pesanan : <?=$namapel;?></h5>
                     </div>
                 </div>
@@ -191,8 +194,8 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                         <th>No</th>
                                         <th>Nama Produk</th>
                                         <th>Harga Satuan</th>
-                                        <th>Jumlah</th>
-                                        <th>Sub-total</th>
+                                        <th>Jumlah Beli</th>
+                                        <th>Total Harga</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -204,6 +207,7 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                         // ini join table query php menghubungkan table detailpenjualan + table produk
                                       $i = 1;
 
+                                        // while ($p = mysqli_fetch_array($get)) {
                                         while ($p = mysqli_fetch_array($get)) {
                                             $idpr = $p['ProdukID'];
                                             $iddp = $p['DetailID'];
@@ -220,18 +224,30 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                                 <td><?= $i++; ?></td>
                                                 <td><?= $namaproduk; ?> (<?=$desk; ?>) </td>
                                                 <td>Rp<?=number_format($harga); ?></td>
-                                                <td><?=number_format($qty); ?></td>
+                                                <td>
+                                                    <input type="number" class="form-control" value="<?=$qty;?>">
+                                                </td>
                                                 <td>Rp<?=number_format($subtotal); ?></td>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#prosesdetailpesanan<?=$iddp?>">
-                                                        Proses 
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#editdetailpesanan<?=$idpr?>">
-                                                        Edit 
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete<?=$idpr;?>">
+                                                <form method="post" action="./fungsi/prosesPembayaran.php">
+                                                <button type="submit" class="btn btn-primary" name="prosesdetailpesanan">Proses </button>
+                                                    <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#delete<?=$idpr;?>">
                                                         Hapus 
                                                     </button>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="NamaProduk" class="form-control" placeholder="Nama Produk" value="<?= $namaproduk; ?>">
+                                                    <input type="hidden" name="qty" class="form-control " placeholder="Jumlah Beli" value="<?= $qty; ?>">
+                                                    <input type="hidden" name="iddp" class="form-control " value="<?=$iddp?>">
+                                                    <input type="hidden" name="idp" class="form-control " value="<?=$idp?>">
+                                                    <input type="hidden" name="idpr" class="form-control " value="<?=$idpr?>">
+                                                    <input type="hidden" name="harga" class="form-control " value="<?=$harga?>">
+                                                    <input type="hidden" name="subtotal" class="form-control " value="<?=$subtotal?>">
+                                                    <input type="hidden" name="idpel" class="form-control " value="<?=$idpel?>">
+                                                    
+                                                </div>
+                                                
+                                            </form>
+                                                    
                                                 </td>
                                             </tr>
 
@@ -388,6 +404,38 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                         </form>
                                     </div>
 
+
+                                    <table class="table table-stripped">
+							
+							<!-- aksi ke table nota -->
+							<form method="POST" action="">
+						
+								<tr>
+									<td>Total Semua  </td>
+									<td><input type="text" class="form-control" name="total" value=""></td>
+								
+									<td>Bayar  </td>
+									<td><input type="text" class="form-control" name="bayar" value=""></td>
+									<td><button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Bayar</button>
+								
+										<a class="btn btn-danger" href="">
+										<b>RESET</b></a></td></td>
+								</tr>
+							</form>
+							<!-- aksi ke table nota -->
+							<tr>
+								<td>Kembali</td>
+								<td><input type="text" class="form-control" value=""></td>
+								<td></td>
+								<td>
+									<a href="cetak.php" target="_blank">
+									<button class="btn btn-secondary">
+										<i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
+									</button></a>
+								</td>
+							</tr>
+						</table>
+
                         </div>
                     </div>
                 </div>
@@ -413,7 +461,7 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

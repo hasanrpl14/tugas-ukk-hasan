@@ -1,29 +1,12 @@
-<?php
-include 'koneksi.php';
-include 'ceklogin.php';
+<?php 
+    require 'koneksi.php';
+    require 'ceklogin.php';
 
-// if(isset($_GET['idp'])){
-//     $idp = $_GET['idp'];
-
-//     $ambilnamapelanggan = mysqli_query($c, "SELECT * FROM penjualan p, pelanggan pl WHERE p.PelangganID=pl.PelangganID AND p.PenjualanID=$idp");
-
-// if (!$ambilnamapelanggan) {
-//     die("Kueri gagal ambil nama: " . mysqli_error($c));
-// }
-
-// $np = mysqli_fetch_array($ambilnamapelanggan);
-//    $namapel = $np['NamaPelanggan'];
-//    $idpel = $np['PelangganID'];
-
-// }   else{
-//     header('Location:index.php');
-// }
-
-
-// validasi if di atas jika tidak ada url view.php?idp=1 
-// intinya jika di urlnya tidak ada id pesanan maka akan kembali ke halaman index
-
+    //Hitung jumlah pelanggan
+    $h1 = mysqli_query($c, "select * from penjualan");
+    $h2 = mysqli_num_rows($h1); // jumlah pesanan
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,9 +26,7 @@ include 'ceklogin.php';
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
-
-    <!-- <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> -->
-    <link rel="icon" href="assets/images/kasir-logo.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -59,7 +40,7 @@ include 'ceklogin.php';
     
 </head>
 <body class="">
-    <!-- [ Pre-loader ] start -->
+	<!-- [ Pre-loader ] start -->
 	<!-- <div class="loader-bg">
 		<div class="loader-track">
 			<div class="loader-fill"></div>
@@ -78,10 +59,119 @@ include 'ceklogin.php';
 	</nav>
 	<!-- [ navigation menu ] end -->
 	<!-- [ Header ] start -->
-	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">	
-    <?php 
-            include "./header.php"
-            ?>
+	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
+		
+			
+				<div class="m-header">
+					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+					<a href="#!" class="b-brand">
+						<!-- ========   change your logo hear   ============ -->
+						<!-- <img src="assets/images/logo.png" alt="" class="logo"> -->
+                        <h4 class="logo text-white">UKK 24</h4>
+						<img src="assets/images/logo-icon.png" alt="" class="logo-thumb">
+					</a>
+					<a href="#!" class="mob-toggler">
+						<i class="feather icon-more-vertical"></i>
+					</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a href="#!" class="pop-search"><i class="feather icon-search"></i></a>
+							<div class="search-bar">
+								<input type="text" class="form-control border-0 shadow-none" placeholder="Search hear">
+								<button type="button" class="close" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						</li>
+					</ul>
+					<ul class="navbar-nav ml-auto">
+						<li>
+							<div class="dropdown">
+								<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
+								<div class="dropdown-menu dropdown-menu-right notification">
+									<div class="noti-head">
+										<h6 class="d-inline-block m-b-0">Notifications</h6>
+										<div class="float-right">
+											<a href="#!" class="m-r-10">mark as read</a>
+											<a href="#!">clear all</a>
+										</div>
+									</div>
+									<ul class="noti-body">
+										<li class="n-title">
+											<p class="m-b-0">NEW</p>
+										</li>
+										<li class="notification">
+											<div class="media">
+												<img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+												<div class="media-body">
+													<p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
+													<p>New ticket Added</p>
+												</div>
+											</div>
+										</li>
+										<li class="n-title">
+											<p class="m-b-0">EARLIER</p>
+										</li>
+										<li class="notification">
+											<div class="media">
+												<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+												<div class="media-body">
+													<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>10 min</span></p>
+													<p>Prchace New Theme and make payment</p>
+												</div>
+											</div>
+										</li>
+										<li class="notification">
+											<div class="media">
+												<img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+												<div class="media-body">
+													<p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>12 min</span></p>
+													<p>currently login</p>
+												</div>
+											</div>
+										</li>
+										<li class="notification">
+											<div class="media">
+												<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+												<div class="media-body">
+													<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+													<p>Prchace New Theme and make payment</p>
+												</div>
+											</div>
+										</li>
+									</ul>
+									<div class="noti-footer">
+										<a href="#!">show all</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="dropdown drp-user">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="feather icon-user"></i>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right profile-notification">
+									<div class="pro-head">
+										<img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+										<span>John Doe</span>
+										<a href="auth-signin.html" class="dud-logout" title="Logout">
+											<i class="feather icon-log-out"></i>
+										</a>
+									</div>
+									<ul class="pro-body">
+										<li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+										<li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
+										<li><a href="logout.php" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
 			
 	</header>
 	<!-- [ Header ] end -->
@@ -97,12 +187,22 @@ include 'ceklogin.php';
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Data Pesanan : order tanpa pelanggan </h5>
+                            <h5 class="m-b-10">Data Pesanan</h5>
                     </div>
                 </div>
             </div>
         </div>
-
+        <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card .bg-body text-black mb-4">
+                        <div class="card-body">Jumlah Pesanan : <?=$h2;?></div>
+                    </div>
+                </div>
+                    <!-- Button to Open the Modal -->
+                 <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
+                    Tambah Pelanggan
+                </button>
+            </div>
 
             <!-- Button to Open the Modal -->
                  <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -122,33 +222,35 @@ include 'ceklogin.php';
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
 
-                            <form method="post" action="./fungsi/tambahProduk.php">
+                            <form method="post" action="./fungsi/tambahPesanan.php">
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    Pilih pesanan
-                                    <select name="ProdukID" class="form-control">
-                                        <?php
-                                        $getproduk = mysqli_query($c, "select * from produk where ProdukID not in (select ProdukID from detailpenjualan where PenjualanID='$idp')");
+                                    Pilih pelanggan
+                                    <select name="PelangganID" class="form-control">
 
-                                        while ($pl = mysqli_fetch_array($getproduk)) {
-                                            $namaproduk = $pl['NamaProduk'];
-                                            $deskripsi = $pl['Deskripsi'];
-                                            $idproduk = $pl['ProdukID'];
-                                            $stok = $pl['Stok'];
+                                        <?php
+                                        $getpelanggan = mysqli_query($c, "select * from pelanggan");
+
+
+                                        while($pl = mysqli_fetch_array($getpelanggan)) {
+                                            $NamaPelanggan = $pl['NamaPelanggan'];
+                                            $PelangganID = $pl['PelangganID'];
+                                            $Alamat = $pl['Alamat'];
                                         ?>
-                                            <option value="<?= $idproduk; ?>"><?= $namaproduk; ?> - <?= $deskripsi; ?>(Stok: <?=$stok;?>)</option>
+
+                                            <option value="<?=$PelangganID;?>"><?=$NamaPelanggan;?> - <?=$Alamat;?></option>
+
                                         <?php
                                         }
                                         ?>
+
                                     </select>
-                                    <input type="number" name="JumlahProduk" class="form-control mt-4" placeholder="Jumlah" min="1" required>
-                                    <input type="hidden" name="PenjualanID" value="<?= $idp; ?>">
                                 </div>
 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" name="tambahproduk">Submit</button>
+                                    <button type="submit" class="btn btn-primary" name="tambahpesanan">Submit</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
                                 </div>
@@ -168,17 +270,6 @@ include 'ceklogin.php';
                 <div class="card">
                     <div class="card-header">
                         <h5>Data Table</h5>
-                        
-                        <?php   
-                                $get = mysqli_query($c, "SELECT * FROM penjualan");
-                                while ($p = mysqli_fetch_array($get)) {
-                                    $totalHarga = $p['TotalHarga'];
-                                    // Lakukan sesuatu dengan $totalHarga
-                                }
-                            ?>
-                        <input type="text" class="form-control" id="floatingInput" placeholder="total harga" 
-                            value="Rp<?= number_format($totalHarga); ?>" readonly>
-                            <label for="floatingInput">Total Pembelian</label>
                         <div class="alert alert-primary" role="alert">
 							A simple primary alert—check it out!
 						</div>
@@ -189,327 +280,88 @@ include 'ceklogin.php';
                             <table id="dataTable" class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nama Produk</th>
-                                        <th>Harga Satuan</th>
+                                        <th>ID Pesanan</th>
+                                        <th>Tanggal</th>
+                                        <th>Nama Pelanggan</th>
                                         <th>Jumlah</th>
-                                        <th>Sub-total</th>
+                                        <th>Total Pembayaran</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     
                                 <?php
-                                // $get = mysqli_query($c, "SELECT * FROM detailpenjualan AS p
-                                // INNER JOIN produk AS pr ON p.ProdukID = pr.ProdukID
-                                // WHERE p.PenjualanID = pr.PenjualanID");
-       
-                                //         // $get = mysqli_query($c, "select * from detailpenjualan p, produk pr where p.ProdukID=pr.
-                                //         // ProdukID and PenjualanID='$idp'");
-                                        
-                                //         // ini join table query php menghubungkan table detailpenjualan + table produk
-                                //       $i = 1;
+                                        $get = mysqli_query($c, "select * from penjualan p, pelanggan pl where p.PelangganID=pl.
+                                        PelangganID");
+                                        // ini join table query php menghubungkan table pesanan + table pelanggan
+                                      
+                                        while ($p = mysqli_fetch_array($get)) {
+                                            $PenjualanID = $p['PenjualanID'];
+                                            $Tanggal = $p['TanggalPenjualan'];
+                                            $NamaPelanggan = $p['NamaPelanggan'];
+                                            $Alamat = $p['Alamat'];
+                                            $totalHarga = $p['TotalHarga'];
 
-                                //         while ($p = mysqli_fetch_array($get)) {
-                                //     $PenjualanID = $_GET['PenjualanID'];
+                                            // hitung jumlah
+                                            // $hitungjumlah = mysqli_query($c,"select * from detailpenjualan where
+                                            // PenjualanID='$PenjualanID'");
 
-                                //     $get = mysqli_query($c, "SELECT * FROM detailpenjualan AS p
-                                // INNER JOIN produk AS pr ON p.ProdukID = pr.ProdukID
-                                // WHERE p.PenjualanID = pr.PenjualanID");
-
-$PenjualanID = $_GET['PenjualanID'];
-
-$get = mysqli_query($c, "SELECT * FROM detailpenjualan AS p
-                         INNER JOIN produk AS pr ON p.ProdukID = pr.ProdukID
-                         WHERE p.PenjualanID = '$PenjualanID'");
+                                            $hitungjumlah = mysqli_query($c, "select * from detailpenjualan where
+                                             PenjualanID='$PenjualanID'");
 
 
-if (!$get) {
-    // Jika terjadi kesalahan, cetak pesan kesalahan MySQL
-    echo "Error: " . mysqli_error($c);
-} else {
-    // Jika tidak ada kesalahan, lanjutkan dengan pemrosesan hasil query
-    $i = 1;
-    while ($p = mysqli_fetch_array($get)) {
-        // Lakukan sesuatu dengan hasil query
-    
+                                            $jumlah = mysqli_num_rows($hitungjumlah);
 
-                                            $idpr = $p['ProdukID'];
-                                            $iddp = $p['DetailID'];
-                                            $idp = $p['PenjualanID'];
-                                            $qty = $p['JumlahProduk'];
-                                            $harga = $p['Harga'];
-                                            $namaproduk = $p['NamaProduk'];
-                                            $desk = $p['Deskripsi'];
-                                            $subtotal = $p['Subtotal'];
-                                            // $subtotal = $qty*$harga;
-    }
-                                ?>
+                                        ?>
 
                                             <tr>
-                                                <td><?= $i++; ?></td>
-                                                <td><?= $namaproduk; ?> (<?=$desk; ?>) </td>
-                                                <td>Rp<?=number_format($harga); ?></td>
+                                                <td><?= $PenjualanID ; ?></td>
+                                                <td><?= $Tanggal ; ?></td>
+                                                <td><?= $NamaPelanggan ; ?> - <?= $Alamat; ?></td>
+                                                <td><?= $jumlah; ?></td>
+                                                <td>Rp<?=number_format($totalHarga); ?></td>
                                                 <td>
-                                                    <input type="number" value="<?=$qty?>"  class="form-control">
-                                                </td>
-                                                <td>Rp<?=number_format($subtotal); ?></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#prosesdetailpesanan<?=$idpr?>">
-                                                        Proses 
-                                                    </button>
-
-                                                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete<?=$idpr;?>">
+                                                    <a href="view.php?idp=<?= $PenjualanID;?>"
+                                                    class="btn btn-primary mb-2" target="_blank">Tampilkan</a>
+                                                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete<?=$PenjualanID;?>">
                                                         Hapus 
                                                     </button>
                                                 </td>
                                             </tr>
 
-                                 <!-- The Modal prosess bayar data detail pesanan/order--> 
-                                 <div class="modal fade" id="prosesdetailpesanan<?=$idpr?>">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Bayar Detail Pesanan</h4>
-                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                 <!-- The Modal delete data pesanan/order--> 
+                                 <div class="modal fade" id="delete<?=$PenjualanID;?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Apakah Anda Yakin ingin menghapus Data Pesanan?</h4>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
+
+                                                        <!-- Modal Body -->
+                                                        <form method="post" action="./fungsi/hapusPesanan.php">
+                                                            <div class="modal-body">
+                                                                Hapus data Pesanan
+                                                                <input type="hidden" name="ido" value="<?=$PenjualanID;?>">
+                                                                <input type="hidden" name="idm" value="<?=$idmasuk?>">
+                                                            </div>
+
+                                                            <!-- Modal Footer -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary" name="hapusdatapesanan">Submit</button>
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                            <!-- Modal Body -->
-                                            <form method="post" action="./fungsi/prosesPembayaran.php">
-                                                <div class="modal-body">
-                                                    <label for="NamaProduk">Nama Produk</label>
-                                                    <input type="text" name="NamaProduk" class="form-control" placeholder="Nama Produk" value="<?= $namaproduk; ?>" readonly>
-                                                    <label for="qty">Jumlah Beli</label>
-                                                    <input type="number" name="qty" class="form-control mt-2" placeholder="Jumlah Beli" value="<?= $qty; ?>">
-                                                    <input type="hidden" name="iddp" class="form-control mt-2" value="<?=$iddp?>">
-                                                    <input type="hidden" name="idp" class="form-control mt-2" value="<?=$idp?>">
-                                                    <input type="hidden" name="idpr" class="form-control mt-2" value="<?=$idpr?>">
-                                                    <input type="hidden" name="harga" class="form-control mt-2" value="<?=$harga?>">
-                                                    <input type="hidden" name="subtotal" class="form-control mt-2" value="<?=$subtotal?>">
-                                                    <input type="hidden" name="idpel" class="form-control mt-2" value="<?=$idpel?>">
-                                                </div>
-
-                                                <!-- Modal Footer -->
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary" name="prosesdetailpesanan">Submit</button>
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                 <!-- The Modal edit data detail pesanan/order--> 
-                                 <div class="modal fade" id="editdetailpesanan<?=$idpr;?>">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Ubah Data Detail Pesanan</h4>
-                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            </div>
-
-                                            <!-- Modal Body -->
-                                            <form method="post" action="./fungsi/editDetailPesanan.php">
-                                                <div class="modal-body">
-                                                    <input type="text" name="NamaProduk" class="form-control" placeholder="Nama Produk" value="<?= $namaproduk; ?>" disabled>
-                                                    <input type="number" name="qty" class="form-control mt-2" placeholder="Harga" value="<?= $qty; ?>">
-                                                    <input type="hidden" name="iddp" class="form-control mt-2" value="<?=$iddp?>">
-                                                    <input type="hidden" name="idp" class="form-control mt-2" value="<?=$idp?>">
-                                                    <input type="hidden" name="idpr" class="form-control mt-2" value="<?=$idpr?>">
-                                            
-                                                </div>
-
-                                                <!-- Modal Footer -->
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary" name="editdetailpesanan">Submit</button>
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                 <!-- The Modal habus data detail pesanan/order--> 
-                                 <div class="modal fade" id="delete<?=$idpr;?>">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Apakah Anda Yakin ingin menghapus Data Pesanan?</h4>
-                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            </div>
-
-                                            <!-- Modal Body -->
-                                            <form method="post" action="./fungsi/hapusProdukpesanan.php">
-                                                <div class="modal-body">
-                                                    Hapus data Pesanan
-                                                    <input type="hidden" name="idp" value="<?= $iddp; ?>">
-                                                    <input type="hidden" name="idpr" value="<?= $idpr; ?>">
-                                                    <input type="hidden" name="idorder" value="<?= $idp; ?>">
-                                                </div>
-
-                                                <!-- Modal Footer -->
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary" name="hapusprodukpesanan">Submit</button>
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                                 <?php
                                         }; //end of white
 
                                         ?>
                                 </tbody>
                             </table>
-
-                            <?php   
-                                $get = mysqli_query($c, "SELECT * FROM penjualan");
-                                while ($p = mysqli_fetch_array($get)) {
-                                    $totalHarga = $p['TotalHarga'];
-                                    // Lakukan sesuatu dengan $totalHarga
-                                }
-                            ?>
-        
-                                    <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="total harga" 
-                                    value="Rp<?= number_format($totalHarga); ?>">
-                                    <label for="floatingInput">Total Pembelian</label>
-                                        <form method="post" action="./fungsi/simpan_Totalpembayaran.php">
-                                            <?php 
-                                            // include '../koneksi.php';
-                                            // $detailpenjualan = mysqli_query($c, "SELECT SUM(Subtotal) AS TotalHarga FROM detailpenjualan WHERE 	PenjualanID='$idp[PenjualanID]'"); 
-                                            // // $row = mysqli_fetch_assoc($detailpenjualan); 
-                                            // // $sum = $row['TotalHarga'];
-
-                                            $detailpenjualan = mysqli_query($c, "SELECT SUM(Subtotal) AS TotalHarga FROM detailpenjualan WHERE PenjualanID='$idp'");
-                                            if (!$detailpenjualan) {
-                                                die("Error: " . mysqli_error($c));
-                                            }
-
-                                            $hasil = mysqli_fetch_assoc($detailpenjualan);
-                                            $totalHarga = $hasil['TotalHarga'];
-
-                                            ?>
-                                            <div class="row">
-                                                <div class="col-sm-10">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" style="width: 50%;"
-                                                         name="TotalHarga" value="<?php echo $totalHarga; ?>" readonly>
-                                                        <input type="text" name="idp" class="form-control mt-2" value="<?=$idp?>">
-                                                        <input type="text" name="idpel" class="form-control mt-2" value="<?=$idpel?>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button class="btn btn-outline-info mb-4" type="submit">Simpan</button>
-                                                        <button class="btn btn-outline-danger mb-4" type="submit">
-                                                            <a href="cetak.php?idp=<?= $PenjualanID;?>" target="_blank">Cetak</a>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <button class="btn btn-info btn-sm form-control" type="submit">Simpan</button>
-                                                    </div>
-                                                </div> -->
-                                            </div>
-                                        </form>
-                                    </div>
-
-
-                                    <?php $hasil = $lihat -> jumlah(); ?>
-					<div id="kasirnya">
-						<table class="table table-stripped">
-							<?php
-							// proses bayar dan ke nota
-							if(!empty($_GET['nota'] == 'yes')) {
-								$total = $_POST['total'];
-								$bayar = $_POST['bayar'];
-								if(!empty($bayar))
-								{
-									$hitung = $bayar - $total;
-									if($bayar >= $total)
-									{
-										$id_barang = $_POST['id_barang'];
-										$id_member = $_POST['id_member'];
-										$jumlah = $_POST['jumlah'];
-										$total = $_POST['total1'];
-										$tgl_input = $_POST['tgl_input'];
-										$periode = $_POST['periode'];
-										$jumlah_dipilih = count($id_barang);
-										
-										for($x=0;$x<$jumlah_dipilih;$x++){
-
-											$d = array($id_barang[$x],$id_member[$x],$jumlah[$x],$total[$x],$tgl_input[$x],$periode[$x]);
-											$sql = "INSERT INTO nota (id_barang,id_member,jumlah,total,tanggal_input,periode) VALUES(?,?,?,?,?,?)";
-											$row = $config->prepare($sql);
-											$row->execute($d);
-
-											// ubah stok barang
-											$sql_barang = "SELECT * FROM barang WHERE id_barang = ?";
-											$row_barang = $config->prepare($sql_barang);
-											$row_barang->execute(array($id_barang[$x]));
-											$hsl = $row_barang->fetch();
-											
-											$stok = $hsl['stok'];
-											$idb  = $hsl['id_barang'];
-
-											$total_stok = $stok - $jumlah[$x];
-											// echo $total_stok;
-											$sql_stok = "UPDATE barang SET stok = ? WHERE id_barang = ?";
-											$row_stok = $config->prepare($sql_stok);
-											$row_stok->execute(array($total_stok, $idb));
-										}
-										echo '<script>alert("Belanjaan Berhasil Di Bayar !");</script>';
-									}else{
-										echo '<script>alert("Uang Kurang ! Rp.'.$hitung.'");</script>';
-									}
-								}
-							}
-							?>
-							<!-- aksi ke table nota -->
-							<form method="POST" action="index.php?page=jual&nota=yes#kasirnya">
-								<?php foreach($hasil_penjualan as $isi){;?>
-									<input type="hidden" name="id_barang[]" value="<?php echo $isi['id_barang'];?>">
-									<input type="hidden" name="id_member[]" value="<?php echo $isi['id_member'];?>">
-									<input type="hidden" name="jumlah[]" value="<?php echo $isi['jumlah'];?>">
-									<input type="hidden" name="total1[]" value="<?php echo $isi['total'];?>">
-									<input type="hidden" name="tgl_input[]" value="<?php echo $isi['tanggal_input'];?>">
-									<input type="hidden" name="periode[]" value="<?php echo date('m-Y');?>">
-								<?php $no++; }?>
-								<tr>
-									<td>Total Semua  </td>
-									<td><input type="text" class="form-control" name="total" value="<?php echo $total_bayar;?>"></td>
-								
-									<td>Bayar  </td>
-									<td><input type="text" class="form-control" name="bayar" value="<?php echo $bayar;?>"></td>
-									<td><button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Bayar</button>
-									<?php  if(!empty($_GET['nota'] == 'yes')) {?>
-										<a class="btn btn-danger" href="fungsi/hapus/hapus.php?penjualan=jual">
-										<b>RESET</b></a></td><?php }?></td>
-								</tr>
-							</form>
-							<!-- aksi ke table nota -->
-							<tr>
-								<td>Kembali</td>
-								<td><input type="text" class="form-control" value="<?php echo $hitung;?>"></td>
-								<td></td>
-								<td>
-									<a href="print.php?nm_member=<?php echo $_SESSION['admin']['nm_member'];?>
-									&bayar=<?php echo $bayar;?>&kembali=<?php echo $hitung;?>" target="_blank">
-									<button class="btn btn-secondary">
-										<i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
-									</button></a>
-								</td>
-							</tr>
-						</table>
-						<br/>
-						<br/>
-					</div>
-                    
-
                         </div>
                     </div>
                 </div>
@@ -535,6 +387,7 @@ if (!$get) {
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
+
     <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
     <!-- Core plugin JavaScript-->

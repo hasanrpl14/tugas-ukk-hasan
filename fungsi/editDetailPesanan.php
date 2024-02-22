@@ -30,7 +30,9 @@ if(isset($_POST['editdetailpesanan'])){
         $query1 = mysqli_query($c, "UPDATE detailpenjualan SET JumlahProduk='$qty' WHERE DetailID='$iddp'"); // stok
         $query2 = mysqli_query($c, "UPDATE produk SET Stok='$newstock' WHERE ProdukID='$idpr'"); // stok
 
-        if($query1 && $query2){
+        $insert = mysqli_query($c, "UPDATE penjualan SET Subtotal='$Subtotal', JumlahProduk='$JumlahProduk' where DetailID='$iddp'");
+
+        if($query1 && $query2 && $insert){
             header('location:../view.php?idp='.$idp);
 
     } else {

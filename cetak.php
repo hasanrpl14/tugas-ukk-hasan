@@ -1,3 +1,7 @@
+<?php 
+include 'koneksi.php'
+?>
+
 <html>
 <head>
 <title>Kasir Ukk Hasan</title>
@@ -47,6 +51,7 @@ hr {
 <td width='13%'>Total</td><tr>
 <td colspan='5'><hr></td></tr>
 </tr>
+
 <tr>
     <!-- <td style='vertical-align:top'>Hasan</td> -->
 <td style='vertical-align:top'>3 WAY STOPCOCK</td>

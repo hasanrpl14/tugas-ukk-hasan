@@ -34,18 +34,13 @@ if(isset($_POST['tambahproduk'])){
 
         
         if($insert&&$update){
-            header("location:../view.php?idp='.$idp.'");
+            header('location:../view.php?idp='.$idp);
         } else {
             echo '
             <script>alert("Gagal menambah pesanan baru");
             window.location.href="../view.php?idp='.$idp.'"
             </script>
             ';
-            // echo '
-        // <script>alert("Stok barang tidak cukup");
-        // window.location.href="../view.php?idp='.$idp.'"
-        // </script>
-        // ';
         }
     } else {
         // stok gak cukup

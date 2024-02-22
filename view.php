@@ -175,9 +175,7 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                     // Lakukan sesuatu dengan $totalHarga
                                 }
                             ?>
-                        <input type="text" class="form-control" id="floatingInput" placeholder="total harga" 
-                            value="Rp<?= number_format($totalHarga); ?>" readonly>
-                            <label for="floatingInput">Total Pembelian</label>
+        
                         <div class="alert alert-primary" role="alert">
 							A simple primary alert—check it out!
 						</div>
@@ -345,9 +343,7 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                             ?>
         
                                     <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="total harga" 
-                                    value="Rp<?= number_format($totalHarga); ?>">
-                                    <label for="floatingInput">Total Pembelian</label>
+                               
                                         <form method="post" action="./fungsi/simpan_Totalpembayaran.php">
                                             <?php 
                                             // include '../koneksi.php';
@@ -367,17 +363,13 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                             <div class="row">
                                                 <div class="col-sm-10">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" style="width: 50%;"
+                                                        <input type="hidden" class="form-control" style="width: 50%;"
                                                          name="TotalHarga" value="<?php echo $totalHarga; ?>" readonly>
-                                                        <input type="text" name="idp" class="form-control mt-2" value="<?=$idp?>">
-                                                        <input type="text" name="idpel" class="form-control mt-2" value="<?=$idpel?>">
+                                                        <input type="hidden" name="idp" class="form-control mt-2" value="<?=$idp?>">
+                                                        <input type="hidden" name="idpel" class="form-control mt-2" value="<?=$idpel?>">
                                                     </div>
                                                     <div class="form-group">
                                                         <button class="btn btn-outline-info mb-4" type="submit">Simpan</button>
-                                                        <button class="btn btn-outline-danger mb-4" type="submit">
-                                                            <a href="cetak.php?idp=<?= $PenjualanID;?>" target="_blank">Cetak</a>
-                                                        </button>
-                                                    </div>
                                                 </div>
                                                 <!-- <div class="col-sm-2">
                                                     <div class="form-group">
@@ -387,6 +379,41 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                             </div>
                                         </form>
                                     </div>
+
+
+                                    <!-- tabel bayar -->
+                                    <table class="table table-stripped">
+							
+							<!-- aksi ke table nota -->
+							<form method="post" action="">
+						
+								<tr>
+									<td>Total Semua  </td>
+									<td><input type="text" class="form-control" name="total" value="Rp<?=number_format($totalHarga); ?>" readonly></td>
+                             		
+									<td>Bayar  </td>
+									<td><input type="number" class="form-control" name="bayar" value=""></td>
+									<td><button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Bayar</button>
+								
+										<a class="btn btn-danger" href="">
+										<b>RESET</b></a></td></td>
+								</tr>
+							</form>
+							<!-- aksi ke table nota -->
+							<tr>
+								<td>Kembali</td>
+								<td><input type="text" class="form-control" value=""></td>
+								<td></td>
+								<td>
+									<a href="cetak.php?idp=<?= $idp;?>" target="_blank">
+									<button class="btn btn-secondary">
+										<i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
+									</button></a>
+                                    <a href="cetak2.php">cetak 2</a>
+								</td>
+							</tr>
+						</table>
+                                    <!-- tabel bayar -->
 
                         </div>
                     </div>

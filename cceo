@@ -1,125 +1,149 @@
-<<<<<<< HEAD
-<?php 
-$query = mysqli_query($c, "SELECT * FROM user WHERE username = '$_SESSION[username]' ");
-// ini untuk mengambil data user  setelah login dari session
-$hasil = mysqli_fetch_array($query);
+<?php
+include 'koneksi.php';
+include 'ceklogin.php';
+
+
+
+if(isset($_GET['idp'])){
+    $idp = $_GET['idp'];
+
+    // Pastikan $idp adalah angka yang valid sebelum digunakan dalam kueri SQL
+    if (!is_numeric($idp)) {
+        die("ID pesanan tidak valid.");
+    }
+
+    $ambilnamapelanggan = mysqli_query($c, "SELECT * FROM penjualan p, pelanggan pl WHERE p.PelangganID=pl.PelangganID AND p.PenjualanID=$idp");
+
+    if (!$ambilnamapelanggan) {
+        die("Kueri gagal ambil nama: " . mysqli_error($c));
+    }
+
+    $np = mysqli_fetch_array($ambilnamapelanggan);
+    $namapel = $np['NamaPelanggan'];
+    $idpel = $np['PelangganID'];
+
+} else {
+    header('Location:index.php');
+}
+
+
+// validasi if di atas jika tidak ada url view.php?idp=1 
+// intinya jika di urlnya tidak ada id pesanan maka akan kembali ke halaman index
+
 ?>
 
 
+<html>
+<head>
+<title>Kasir Ukk Hasan</title>
+<style>
+ 
+#tabel
+{
+font-size:15px;
+border-collapse:collapse;
+}
+#tabel  td
+{
+padding-left:5px;
+border: 1px solid black;
+}
+</style>
+</head>
+<body style='font-family:tahoma; font-size:8pt;'>
+<center><table style='width:350px; font-size:16pt; font-family:calibri; border-collapse: collapse;' border = '0'>
+<td width='70%' align='CENTER' vertical-align:top'><span style='color:black;'>
+<b>UKK KASIR 2024</b></br>SMK NU 01 KENDAL</span></br>
+ 
+ 
+<span style='font-size:12pt'>No. : xxxxx, 11 Juni 2020 (user:HASAN), 11:57:50</span></br>
+</td>
+</table>
+<style>
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+} 
+</style>
+<table cellspacing='0' cellpadding='0' style='width:450px; font-size:12pt; font-family:calibri;  border-collapse: collapse;' border='0'>
+ 
+<tr align='center'>
 
-<div class="navbar-content scroll-div " >
-				
-				<div class="">
-					<div class="main-menu-header">
-						<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="User-Profile-Image">
-						<div class="user-details">
-							<div id="more-details"><?php echo$hasil['username']?><i class="fa fa-caret-down"></i></div>
-						</div>
-					</div>
-					<div class="collapse" id="nav-user-link">
-						<ul class="list-unstyled">
-							<li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>View Profile</a></li>
-							<li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a></li>
-							<li class="list-group-item"><a href="logout.php"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
-						</ul>
-					</div>
-				</div>
-				
-				<ul class="nav pcoded-inner-navbar ">
-					<li class="nav-item pcoded-menu-caption">
-					    <label>Navigation</label>
-					</li>
-					<li class="nav-item">
-					    <a href="index.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
-					</li>
-					<li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-database"></i></span><span class="pcoded-mtext">Data Master</span></a>
-					    <ul class="pcoded-submenu">
-					        <li><a href="stok.php" target="_blank">Stok Barang</a></li>
-					        <li><a href="masuk.php" target="_blank">Barang Masuk</a></li>
-					        <li><a href="pelanggan.php" target="_blank">Kelola Pelanggan</a></li>
-					    </ul>
-					</li>
-					<li class="nav-item pcoded-menu-caption">
-					    <label>Transaksi</label>
-					</li>
-					<li class="nav-item pcoded-hasmenu">
-					    <a href="order.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Order</span></a>
-					</li>
-				
-					<li class="nav-item pcoded-menu-caption">
-					    <label>Admin</label>
-					</li>
-					<li class="nav-item">
-					    <a href="user.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">User</span></a>
-					</li>
-				</ul>
-				
-				
-				<!-- <div class="card text-center">
-					<div class="card-block">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<i class="feather icon-sunset f-40"></i>
-						<h6 class="mt-3">Download Pro</h6>
-						<p>Getting more features with pro version</p>
-						<a href="https://1.envato.market/qG0m5" target="_blank" class="btn btn-primary btn-sm text-white m-0">Upgrade Now</a>
-					</div>
-				</div> -->
-				
-			</div>
-=======
- <!-- Required Js -->
- <script src="assets/js/vendor-all.min.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
-    <!-- <script src="assets/js/ripple.js"></script> -->
-    <script src="assets/js/pcoded.min.js"></script>
+<!-- <td width='10%'>Nama Pelanggan</td> -->
+<td width='10%'>Item</td>
+<td width='13%'>Price</td>
+<td width='4%'>Qty</td>
+<td width='7%'>Diskon %</td>
+<td width='13%'>Total</td><tr>
+<td colspan='5'><hr></td></tr>
+</tr>
 
-<!-- Apex Chart -->
-<script src="assets/js/plugins/apexcharts.min.js"></script>
+<?php
+    $get = mysqli_query($c, "select * from detailpenjualan p, produk pr where p.ProdukID=pr.
+    ProdukID and PenjualanID='$idp'");
+    // ini join table query php menghubungkan table detailpenjualan + table produk
+ 
 
+    while ($p = mysqli_fetch_array($get)) {
+        $idpr = $p['ProdukID'];
+        $iddp = $p['DetailID'];
+        $idp = $p['PenjualanID'];
+        $qty = $p['JumlahProduk'];
+        $harga = $p['Harga'];
+        $namaproduk = $p['NamaProduk'];
+        $desk = $p['Deskripsi'];
+        $subtotal = $p['Subtotal'];
+        // $subtotal = $qty*$harga;
+?>
 
-<!-- custom-chart js -->
-<script src="assets/js/pages/dashboard-main.js"></script>
+  
+    <td><?= $namaproduk; ?></td>
+    <td>Rp<?=number_format($harga); ?></td>
+    <td><?=number_format($qty); ?></td>
+    <td>Rp<?=number_format($subtotal); ?></td>
 
+<tr>
+    <td style='vertical-align:top'> </td>
+<td style='vertical-align:top text-align:right; padding-right:10px'><?= $namaproduk; ?></td>
+<td style='vertical-align:top; text-align:right; padding-right:10px'><?=number_format($qty); ?></td>
+<td style='vertical-align:top; text-align:right; padding-right:10px'>Rp<?=number_format($harga); ?></td>
+<td style='vertical-align:top; text-align:right; padding-right:10px'><?=number_format($qty); ?></td>
+<td style='text-align:right; vertical-align:top'>Rp<?=number_format($subtotal); ?></td></tr>
 
+<?php
+                                        }; //end of white
 
+                                        ?>
+<tr>
+<td colspan='5'><hr></td>
+</tr>
+<tr>
+<td colspan = '4'><div style='text-align:right'>Biaya Adm : </div></td><td style='text-align:right; font-size:16pt;'>Rp3.500,00</td>
+</tr>
+<tr>
+<td colspan = '4'><div style='text-align:right; color:black'>Total : </div></td><td style='text-align:right; font-size:16pt; color:black'>747.500</td>
+</tr>
+<tr>
+<td colspan = '4'><div style='text-align:right; color:black'>Cash : </div></td><td style='text-align:right; font-size:16pt; color:black'>1.000.000</td>
+</tr>
+<tr>
+<td colspan = '4'><div style='text-align:right; color:black'>Change : </div></td><td style='text-align:right; font-size:16pt; color:black'>252.500</td>
+</tr>
+<tr>
+<td colspan = '4'><div style='text-align:right; color:black'>DP : </div></td><td style='text-align:right; font-size:16pt; color:black'>0</td>
+</tr>
+<tr>
+<td colspan = '4'><div style='text-align:right; color:black'>Sisa : </div></td><td style='text-align:right; font-size:16pt; color:black'>0</td>
+</tr>
+</table>
+<table style='width:350; font-size:12pt;' cellspacing='2'><tr></br><td align='center'>****** TERIMAKASIH ******</br></td></tr></table></center></body>
+</html>
 
-   <!-- Required Js -->
-   <script src="assets/js/vendor-all.min.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
-    <!-- <script src="assets/js/ripple.js"></script> -->
-    <script src="assets/js/pcoded.min.js"></script>
-
-<!-- Apex Chart -->
-<script src="assets/js/plugins/apexcharts.min.js"></script>
-
-
-<!-- custom-chart js -->
-<script src="assets/js/pages/dashboard-main.js"></script>
-
-<!-- awal datatables -->
-
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-        <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
-
-<!-- akhir datatables -->
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
->>>>>>> fb5a8ce84b776833683cf347714328d174a7c050
-
-
-<button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#editdetailpesanan<?=$idpr?>">
-                                                        Edit 
-                                                    </button>
+<script>
+ window.print();
+ </script>

@@ -41,11 +41,11 @@
 </head>
 <body class="">
 	<!-- [ Pre-loader ] start -->
-	<!-- <div class="loader-bg">
+	<div class="loader-bg">
 		<div class="loader-track">
 			<div class="loader-fill"></div>
 		</div>
-	</div> -->
+	</div>
 	<!-- [ Pre-loader ] End -->
 	<!-- [ navigation menu ] start -->
 	<nav class="pcoded-navbar menu-light ">
@@ -387,7 +387,6 @@
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
-
     <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
     <!-- Core plugin JavaScript-->

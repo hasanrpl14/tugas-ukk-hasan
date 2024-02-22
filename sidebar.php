@@ -30,7 +30,7 @@ $hasil = mysqli_fetch_array($query);
 					    <a href="index.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fa-solid fa-database"></i></span><span class="pcoded-mtext">Data Master</span></a>
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-database"></i></span><span class="pcoded-mtext">Data Master</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="stok.php" target="_blank">Stok Barang</a></li>
 					        <li><a href="masuk.php" target="_blank">Barang Masuk</a></li>
@@ -41,8 +41,7 @@ $hasil = mysqli_fetch_array($query);
 					    <label>Transaksi</label>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
-					    <!-- <a href="order.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Order</span></a> -->
-					    <a href="order.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Order 2</span></a>
+					    <a href="order.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Order</span></a>
 					</li>
 					<?php
                         // Cek apakah pengguna telah login
@@ -56,7 +55,7 @@ $hasil = mysqli_fetch_array($query);
 					    <label>Admin</label>
 					</li>
 					<li class="nav-item">
-					    <a href="user.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">User</span></a>
+					    <a href="user.php" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user"></i></span><span class="pcoded-mtext">User</span></a>
 					</li>
                         
                         <?php

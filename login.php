@@ -3,7 +3,7 @@
 
 <head>
 
-	<title>Ablepro v8.0 bootstrap admin template by Phoenixcoded</title>
+	<title>Login ukk kasir 24</title>
 	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 11]>
@@ -24,8 +24,6 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	
 	
-
-
 </head>
 
 <!-- [ auth-signin ] start -->
@@ -35,16 +33,17 @@
 			<div class="row align-items-center text-center">
 				<div class="col-md-12">
 					<div class="card-body">
-						<img src="assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
-						<h4 class="mb-3 f-w-400">Signin</h4>
+						<h3 class="mb-3 f-b-400 text-primary">UKK Kasir 24</h3>
+						<!-- <img src="assets/images/logo-dark.png" alt="" class="img-fluid mb-4"> -->
+						<h4 class="mb-3 f-w-400">Login</h4>
 						<form method="post" action="proseslogin.php">
 						<!-- <div class="form-group mb-3">
 							<label class="floating-label" for="Email">Email address</label>
 							<input type="text" class="form-control" id="Email" placeholder="">
 						</div> -->
 						<div class="form-group mb-3">
-							<label class="floating-label" for="Email">Username</label>
-							<input type="text" class="form-control" id="Email" name="username" placeholder="">
+							<label class="floating-label" for="Email">Email</label>
+							<input type="email" class="form-control" id="Email" name="email" placeholder="">
 						</div>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Password">Password</label>
@@ -54,9 +53,9 @@
 							<input type="checkbox" class="custom-control-input" id="customCheck1">
 							<label class="custom-control-label" for="customCheck1">Save credentials.</label>
 						</div>
-						<button type="submit" class="btn btn-block btn-primary mb-4" name="login">Signin</button>
+						<button type="submit" class="btn btn-block btn-primary mb-4" name="login">Masuk</button>
 						<p class="mb-2 text-muted">Forgot password? <a href="auth-reset-password.html" class="f-w-400">Reset</a></p>
-						<p class="mb-0 text-muted">Don’t have an account? <a href="auth-signup.html" class="f-w-400">Signup</a></p>
+						<p class="mb-0 text-muted">Don’t have an account? <a href="daftar.php" class="f-w-400">Signup</a></p>
 						</form>
 					</div>
 				</div>

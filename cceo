@@ -1,149 +1,189 @@
-<?php
-include 'koneksi.php';
-include 'ceklogin.php';
+<div class="col-lg-5 col-md-12">
+                <!-- page statustic card start -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="text-c-yellow">$30200</h4>
+                                        <h6 class="text-muted m-b-0">All Earnings</h6>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <i class="feather icon-bar-chart-2 f-28"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-yellow">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <p class="text-white m-b-0">% change</p>
+                                    </div>
+                                    <div class="col-3 text-right">
+                                        <i class="feather icon-trending-up text-white f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="text-c-green">290+</h4>
+                                        <h6 class="text-muted m-b-0">Page Views</h6>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <i class="feather icon-file-text f-28"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-green">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <p class="text-white m-b-0">% change</p>
+                                    </div>
+                                    <div class="col-3 text-right">
+                                        <i class="feather icon-trending-up text-white f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="text-c-red">145</h4>
+                                        <h6 class="text-muted m-b-0">Task</h6>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <i class="feather icon-calendar f-28"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-red">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <p class="text-white m-b-0">% change</p>
+                                    </div>
+                                    <div class="col-3 text-right">
+                                        <i class="feather icon-trending-down text-white f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="text-c-blue">500</h4>
+                                        <h6 class="text-muted m-b-0">Downloads</h6>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <i class="feather icon-thumbs-down f-28"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-blue">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <p class="text-white m-b-0">% change</p>
+                                    </div>
+                                    <div class="col-3 text-right">
+                                        <i class="feather icon-trending-down text-white f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- page statustic card end -->
+            </div>
 
 
 
-if(isset($_GET['idp'])){
-    $idp = $_GET['idp'];
-
-    // Pastikan $idp adalah angka yang valid sebelum digunakan dalam kueri SQL
-    if (!is_numeric($idp)) {
-        die("ID pesanan tidak valid.");
-    }
-
-    $ambilnamapelanggan = mysqli_query($c, "SELECT * FROM penjualan p, pelanggan pl WHERE p.PelangganID=pl.PelangganID AND p.PenjualanID=$idp");
-
-    if (!$ambilnamapelanggan) {
-        die("Kueri gagal ambil nama: " . mysqli_error($c));
-    }
-
-    $np = mysqli_fetch_array($ambilnamapelanggan);
-    $namapel = $np['NamaPelanggan'];
-    $idpel = $np['PelangganID'];
-
-} else {
-    header('Location:index.php');
-}
 
 
-// validasi if di atas jika tidak ada url view.php?idp=1 
-// intinya jika di urlnya tidak ada id pesanan maka akan kembali ke halaman index
-
-?>
 
 
-<html>
-<head>
-<title>Kasir Ukk Hasan</title>
-<style>
- 
-#tabel
-{
-font-size:15px;
-border-collapse:collapse;
-}
-#tabel  td
-{
-padding-left:5px;
-border: 1px solid black;
-}
-</style>
-</head>
-<body style='font-family:tahoma; font-size:8pt;'>
-<center><table style='width:350px; font-size:16pt; font-family:calibri; border-collapse: collapse;' border = '0'>
-<td width='70%' align='CENTER' vertical-align:top'><span style='color:black;'>
-<b>UKK KASIR 2024</b></br>SMK NU 01 KENDAL</span></br>
- 
- 
-<span style='font-size:12pt'>No. : xxxxx, 11 Juni 2020 (user:HASAN), 11:57:50</span></br>
-</td>
-</table>
-<style>
-hr { 
-    display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;
-} 
-</style>
-<table cellspacing='0' cellpadding='0' style='width:450px; font-size:12pt; font-family:calibri;  border-collapse: collapse;' border='0'>
- 
-<tr align='center'>
 
-<!-- <td width='10%'>Nama Pelanggan</td> -->
-<td width='10%'>Item</td>
-<td width='13%'>Price</td>
-<td width='4%'>Qty</td>
-<td width='7%'>Diskon %</td>
-<td width='13%'>Total</td><tr>
-<td colspan='5'><hr></td></tr>
-</tr>
-
-<?php
-    $get = mysqli_query($c, "select * from detailpenjualan p, produk pr where p.ProdukID=pr.
-    ProdukID and PenjualanID='$idp'");
-    // ini join table query php menghubungkan table detailpenjualan + table produk
- 
-
-    while ($p = mysqli_fetch_array($get)) {
-        $idpr = $p['ProdukID'];
-        $iddp = $p['DetailID'];
-        $idp = $p['PenjualanID'];
-        $qty = $p['JumlahProduk'];
-        $harga = $p['Harga'];
-        $namaproduk = $p['NamaProduk'];
-        $desk = $p['Deskripsi'];
-        $subtotal = $p['Subtotal'];
-        // $subtotal = $qty*$harga;
-?>
-
-  
-    <td><?= $namaproduk; ?></td>
-    <td>Rp<?=number_format($harga); ?></td>
-    <td><?=number_format($qty); ?></td>
-    <td>Rp<?=number_format($subtotal); ?></td>
-
-<tr>
-    <td style='vertical-align:top'> </td>
-<td style='vertical-align:top text-align:right; padding-right:10px'><?= $namaproduk; ?></td>
-<td style='vertical-align:top; text-align:right; padding-right:10px'><?=number_format($qty); ?></td>
-<td style='vertical-align:top; text-align:right; padding-right:10px'>Rp<?=number_format($harga); ?></td>
-<td style='vertical-align:top; text-align:right; padding-right:10px'><?=number_format($qty); ?></td>
-<td style='text-align:right; vertical-align:top'>Rp<?=number_format($subtotal); ?></td></tr>
-
-<?php
-                                        }; //end of white
-
-                                        ?>
-<tr>
-<td colspan='5'><hr></td>
-</tr>
-<tr>
-<td colspan = '4'><div style='text-align:right'>Biaya Adm : </div></td><td style='text-align:right; font-size:16pt;'>Rp3.500,00</td>
-</tr>
-<tr>
-<td colspan = '4'><div style='text-align:right; color:black'>Total : </div></td><td style='text-align:right; font-size:16pt; color:black'>747.500</td>
-</tr>
-<tr>
-<td colspan = '4'><div style='text-align:right; color:black'>Cash : </div></td><td style='text-align:right; font-size:16pt; color:black'>1.000.000</td>
-</tr>
-<tr>
-<td colspan = '4'><div style='text-align:right; color:black'>Change : </div></td><td style='text-align:right; font-size:16pt; color:black'>252.500</td>
-</tr>
-<tr>
-<td colspan = '4'><div style='text-align:right; color:black'>DP : </div></td><td style='text-align:right; font-size:16pt; color:black'>0</td>
-</tr>
-<tr>
-<td colspan = '4'><div style='text-align:right; color:black'>Sisa : </div></td><td style='text-align:right; font-size:16pt; color:black'>0</td>
-</tr>
-</table>
-<table style='width:350; font-size:12pt;' cellspacing='2'><tr></br><td align='center'>****** TERIMAKASIH ******</br></td></tr></table></center></body>
-</html>
-
-<script>
- window.print();
- </script>
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <!-- support-section start -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="card support-bar overflow-hidden">
+                                <div class="card-body pb-0">
+                                    <h3 class="m-0 text-center text-c-blue">Stok Barang</h3>
+                                    <!-- <span class="text-c-green">Support Requests</span> -->
+                                    <h1 class="mb-3 mt-3 text-center"><?=$h2;?></h1>
+                                </div>
+                                <!-- <div id="support-chart1"></div> -->
+                                <div class="card-footer bg-primary text-white">
+                                    <div class="row text-center">
+                                        <div class="col">
+                                            <span><a href="stok.php">
+                                            <h5 class="m-0 text-white">Detail Barang</h5>
+                                            </a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card support-bar overflow-hidden">
+                                <div class="card-body pb-0">
+                                    <h3 class="m-0 text-center text-c-green">Penjualan</h3>
+                                    <!-- <span class="text-c-green">Support Requests</span> -->
+                                    <h1 class="mb-3 mt-3 text-center"><?=$h4;?></h1>
+                                </div>
+                                <!-- <div id="support-chart1"></div> -->
+                                <div class="card-footer bg-success text-white">
+                                    <div class="row text-center">
+                                        <div class="col">
+                                            <span><a href="order.php">
+                                            <h5 class="m-0 text-white">Detail Penjualan</h5>
+                                            </a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-6">
+                            <div class="card support-bar overflow-hidden">
+                                <div class="card-body pb-0">
+                                    <h3 class="m-0 text-center text-c-red">Pelanggan</h3>
+                                    <!-- <span class="text-c-green">Support Requests</span> -->
+                                    <h1 class="mb-3 mt-3 text-center"><?=$h6;?></h1>
+                                </div>
+                                <!-- <div id="support-chart1"></div> -->
+                                <div class="card-footer bg-c-red text-white">
+                                    <div class="row text-center">
+                                        <div class="col">
+                                            <span><a href="pelanggan.php">
+                                            <h5 class="m-0 text-white">Detail Pelanggan</h5>
+                                            </a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- support-section end -->
+                </div>
+             
+                <!-- prject ,team member start -->
+    
+                <!-- prject ,team member start -->
+                <!-- seo start -->
+                <!-- seo end -->
+    
+                <!-- Latest Customers start -->
+                <!-- Latest Customers end -->
+            </div>

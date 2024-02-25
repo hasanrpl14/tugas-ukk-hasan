@@ -1,5 +1,5 @@
 <?php 
-$query = mysqli_query($c, "SELECT * FROM user WHERE username = '$_SESSION[username]' ");
+$query = mysqli_query($c, "SELECT * FROM user WHERE email = '$_SESSION[email]' ");
 // ini untuk mengambil data user  setelah login dari session
 $hasil = mysqli_fetch_array($query);
 ?>
@@ -10,7 +10,7 @@ $hasil = mysqli_fetch_array($query);
 					<div class="main-menu-header">
 						<img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="User-Profile-Image">
 						<div class="user-details">
-							<div id="more-details"><?php echo$hasil['username']?></div>
+							<div id="more-details"><?php echo$hasil['email']?></div>
 						</div>
 					</div>
 					<div class="collapse" id="nav-user-link">
@@ -45,7 +45,7 @@ $hasil = mysqli_fetch_array($query);
 					</li>
 					<?php
                         // Cek apakah pengguna telah login
-                        if(isset($_SESSION['username']) && isset($_SESSION['level'])) {
+                        if(isset($_SESSION['email']) && isset($_SESSION['level'])) {
                             // Pengguna telah login
                             // Disini Anda bisa menentukan apa yang ingin ditampilkan sesuai dengan level pengguna
                             if($_SESSION['level'] == "admin") {

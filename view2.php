@@ -380,12 +380,40 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                         </form>
                                     </div>
 
+
+                                    <!-- tabel bayar -->
+                                    <table class="table table-stripped">
+							
+							<!-- aksi ke table nota -->
+							<form method="post" action="">
+						
+								<tr>
+									<td>Total Semua  </td>
+									<td><input type="text" class="form-control" name="total" value="Rp<?=number_format($totalHarga); ?>" readonly></td>
+                             		
+									<td>Bayar  </td>
+									<td><input type="number" class="form-control" name="bayar" value=""></td>
+									<td><button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Bayar</button>
+								
+										<a class="btn btn-danger" href="">
+										<b>RESET</b></a></td></td>
+								</tr>
+							</form>
+							<!-- aksi ke table nota -->
+							<tr>
+								<td>Kembali</td>
+								<td><input type="text" class="form-control" value=""></td>
+								<td></td>
 								<td>
 									<a href="cetak.php?idp=<?= $idp;?>" target="_blank">
 									<button class="btn btn-secondary">
 										<i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
 									</button></a>
-                                  
+                                    <a href="cetak2.php">cetak 2</a>
+								</td>
+							</tr>
+						</table>
+                                    <!-- tabel bayar -->
 
                         </div>
                     </div>

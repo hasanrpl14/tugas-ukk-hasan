@@ -1,189 +1,180 @@
-<div class="col-lg-5 col-md-12">
-                <!-- page statustic card start -->
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h4 class="text-c-yellow">$30200</h4>
-                                        <h6 class="text-muted m-b-0">All Earnings</h6>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <i class="feather icon-bar-chart-2 f-28"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-c-yellow">
-                                <div class="row align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-white m-b-0">% change</p>
-                                    </div>
-                                    <div class="col-3 text-right">
-                                        <i class="feather icon-trending-up text-white f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<div class="col-xl-12">
+    <div class="row">
+        <div class="col-sm-12 col-md-4">
+            <h5>Left Align</h5>
+            <hr>
+            <div class="card text-left">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment11</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#!" class="btn  btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <h5>Center Align</h5>
+            <hr>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#!" class="btn  btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <h5>Right Align</h5>
+            <hr>
+            <div class="card text-right">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#!" class="btn  btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-lg-7 col-md-12">
+    <!-- <div class="col-lg-7 col-md-12"> -->
+        <!-- support-section start -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card support-bar overflow-hidden">
+                    <div class="card-body pb-0">
+                        <h3 class="m-0 text-center text-c-blue">Stok Barang</h3>
+                        <!-- <span class="text-c-green">Support Requests</span> -->
+                        <h1 class="mb-3 mt-3 text-center"><?=$h2;?></h1>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h4 class="text-c-green">290+</h4>
-                                        <h6 class="text-muted m-b-0">Page Views</h6>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <i class="feather icon-file-text f-28"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-c-green">
-                                <div class="row align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-white m-b-0">% change</p>
-                                    </div>
-                                    <div class="col-3 text-right">
-                                        <i class="feather icon-trending-up text-white f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h4 class="text-c-red">145</h4>
-                                        <h6 class="text-muted m-b-0">Task</h6>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <i class="feather icon-calendar f-28"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-c-red">
-                                <div class="row align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-white m-b-0">% change</p>
-                                    </div>
-                                    <div class="col-3 text-right">
-                                        <i class="feather icon-trending-down text-white f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h4 class="text-c-blue">500</h4>
-                                        <h6 class="text-muted m-b-0">Downloads</h6>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <i class="feather icon-thumbs-down f-28"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-c-blue">
-                                <div class="row align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-white m-b-0">% change</p>
-                                    </div>
-                                    <div class="col-3 text-right">
-                                        <i class="feather icon-trending-down text-white f-16"></i>
-                                    </div>
-                                </div>
+                    <!-- <div id="support-chart1"></div> -->
+                    <div class="card-footer bg-primary text-white">
+                        <div class="row text-center">
+                            <div class="col">
+                                <span><a href="stok.php">
+                                <h5 class="m-0 text-white">Detail Barang</h5>
+                                </a></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- page statustic card end -->
             </div>
-
-
-
-
-
-
-
-
-            <div class="row">
-                <div class="col-lg-7 col-md-12">
-                    <!-- support-section start -->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card support-bar overflow-hidden">
-                                <div class="card-body pb-0">
-                                    <h3 class="m-0 text-center text-c-blue">Stok Barang</h3>
-                                    <!-- <span class="text-c-green">Support Requests</span> -->
-                                    <h1 class="mb-3 mt-3 text-center"><?=$h2;?></h1>
-                                </div>
-                                <!-- <div id="support-chart1"></div> -->
-                                <div class="card-footer bg-primary text-white">
-                                    <div class="row text-center">
-                                        <div class="col">
-                                            <span><a href="stok.php">
-                                            <h5 class="m-0 text-white">Detail Barang</h5>
-                                            </a></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card support-bar overflow-hidden">
-                                <div class="card-body pb-0">
-                                    <h3 class="m-0 text-center text-c-green">Penjualan</h3>
-                                    <!-- <span class="text-c-green">Support Requests</span> -->
-                                    <h1 class="mb-3 mt-3 text-center"><?=$h4;?></h1>
-                                </div>
-                                <!-- <div id="support-chart1"></div> -->
-                                <div class="card-footer bg-success text-white">
-                                    <div class="row text-center">
-                                        <div class="col">
-                                            <span><a href="order.php">
-                                            <h5 class="m-0 text-white">Detail Penjualan</h5>
-                                            </a></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="col-sm-6">
-                            <div class="card support-bar overflow-hidden">
-                                <div class="card-body pb-0">
-                                    <h3 class="m-0 text-center text-c-red">Pelanggan</h3>
-                                    <!-- <span class="text-c-green">Support Requests</span> -->
-                                    <h1 class="mb-3 mt-3 text-center"><?=$h6;?></h1>
-                                </div>
-                                <!-- <div id="support-chart1"></div> -->
-                                <div class="card-footer bg-c-red text-white">
-                                    <div class="row text-center">
-                                        <div class="col">
-                                            <span><a href="pelanggan.php">
-                                            <h5 class="m-0 text-white">Detail Pelanggan</h5>
-                                            </a></span>
-                                        </div>
-                                    </div>
-                                </div>
+            <div class="col-sm-6">
+                <div class="card support-bar overflow-hidden">
+                    <div class="card-body pb-0">
+                        <h3 class="m-0 text-center text-c-green">Penjualan</h3>
+                        <!-- <span class="text-c-green">Support Requests</span> -->
+                        <h1 class="mb-3 mt-3 text-center"><?=$h4;?></h1>
+                    </div>
+                    <!-- <div id="support-chart1"></div> -->
+                    <div class="card-footer bg-success text-white">
+                        <div class="row text-center">
+                            <div class="col">
+                                <span><a href="order.php">
+                                <h5 class="m-0 text-white">Detail Penjualan</h5>
+                                </a></span>
                             </div>
                         </div>
                     </div>
-                    <!-- support-section end -->
                 </div>
-             
-                <!-- prject ,team member start -->
-    
-                <!-- prject ,team member start -->
-                <!-- seo start -->
-                <!-- seo end -->
-    
-                <!-- Latest Customers start -->
-                <!-- Latest Customers end -->
             </div>
+
+            <div class="col-sm-6">
+                <div class="card support-bar overflow-hidden">
+                    <div class="card-body pb-0">
+                        <h3 class="m-0 text-center text-c-red">Pelanggan</h3>
+                        <!-- <span class="text-c-green">Support Requests</span> -->
+                        <h1 class="mb-3 mt-3 text-center"><?=$h6;?></h1>
+                    </div>
+                    <!-- <div id="support-chart1"></div> -->
+                    <div class="card-footer bg-c-red text-white">
+                        <div class="row text-center">
+                            <div class="col">
+                                <span><a href="pelanggan.php">
+                                <h5 class="m-0 text-white">Detail Pelanggan</h5>
+                                </a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- support-section end -->
+    </div>
+
+
+    <i class="feather icon-box"></i>
+
+
+
+
+
+
+
+
+
+
+
+
+    <?php
+include 'koneksi.php';
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasir</title>
+</head>
+<body>
+    <h2>Daftar Produk</h2>
+    <ul>
+        <!-- Tampilkan daftar produk dari database -->
+        <?php
+        $sql = "SELECT * FROM produk";
+        $result = $c->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<li>" . $row["nama"] . " - Rp " . $row["harga"] . "</li>";
+            }
+        } else {
+            echo "0 results";
+        }
+        ?>
+    </ul>
+
+    <form action="proses_transaksi.php" method="post">
+        <label for="produk">Pilih Produk:</label>
+        <select name="produk" id="produk">
+            <!-- Tampilkan opsi produk dari database -->
+            <?php
+            $sql = "SELECT * FROM produk";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row["id"] . "'>" . $row["nama"] . "</option>";
+                }
+            } else {
+                echo "<option value=''>Tidak ada produk</option>";
+            }
+            ?>
+        </select>
+        <label for="jumlah">Jumlah:</label>
+        <input type="number" name="jumlah" id="jumlah" value="1" min="1">
+        <button type="submit">Tambah ke Keranjang</button>
+    </form>
+</body>
+</html>

@@ -2,23 +2,6 @@
 include 'koneksi.php';
 include 'ceklogin.php';
 
-if(isset($_GET['idp'])){
-    $idp = $_GET['idp'];
-
-    $ambilnamapelanggan = mysqli_query($c, "SELECT * FROM penjualan p, pelanggan pl WHERE p.PelangganID=pl.PelangganID AND p.PenjualanID=$idp");
-
-if (!$ambilnamapelanggan) {
-    die("Kueri gagal ambil nama: " . mysqli_error($c));
-}
-
-$np = mysqli_fetch_array($ambilnamapelanggan);
-   $namapel = $np['NamaPelanggan'];
-   $idpel = $np['PelangganID'];
-
-}   else{
-    header('Location:index.php');
-}
-
 
 // validasi if di atas jika tidak ada url view.php?idp=1 
 // intinya jika di urlnya tidak ada id pesanan maka akan kembali ke halaman index
@@ -95,8 +78,7 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Data Pesanan : <?=$idpel;?></h5>
-                            <h5 class="m-b-10">Data Pesanan : <?=$namapel;?></h5>
+                            <h5 class="m-b-10">Data Pesanan : Order tanpa pelanggan</h5>
                     </div>
                 </div>
             </div>
@@ -121,7 +103,7 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
 
-                            <form method="post" action="./fungsi/tambahProduk.php">
+                            <form method="post" action="proses_transaksi.php">
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
@@ -142,7 +124,8 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                         ?>
                                     </select>
                                     <input type="number" name="JumlahProduk" class="form-control mt-4" placeholder="Jumlah" min="1" required>
-                                    <input type="hidden" name="PenjualanID" value="<?= $idp; ?>">
+                                    <input type="number" name="uang_pembayaran" class="form-control mt-4" placeholder="Uang Pembayaran" min="0" required>
+
                                 </div>
 
                                 <!-- Modal footer -->
@@ -197,20 +180,22 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                 <tbody>
                                     
                                 <?php
-                                        $get = mysqli_query($c, "select * from detailpenjualan p, produk pr where p.ProdukID=pr.
-                                        ProdukID and PenjualanID='$idp'");
+                                        // $get = mysqli_query($c, "select * from transaksi t, produk pr where p.ProdukID=pr.
+                                        // ProdukID");
+                                        $get = mysqli_query($c, "SELECT t.*, pr.* FROM transaksi t JOIN produk pr ON t.ProdukID = pr.ProdukID");
+
                                         // ini join table query php menghubungkan table detailpenjualan + table produk
                                       $i = 1;
 
-                                        while ($p = mysqli_fetch_array($get)) {
+                                        while ($p = @mysqli_fetch_array($get)) {
                                             $idpr = $p['ProdukID'];
-                                            $iddp = $p['DetailID'];
-                                            $idp = $p['PenjualanID'];
+                                            $iddp = $p['TransaksiID'];
+                                            // $idp = $p['PenjualanID'];
                                             $qty = $p['JumlahProduk'];
                                             $harga = $p['Harga'];
                                             $namaproduk = $p['NamaProduk'];
                                             $desk = $p['Deskripsi'];
-                                            $subtotal = $p['Subtotal'];
+                                            $subtotal = $p['TotalHarga'];
                                             // $subtotal = $qty*$harga;
                                 ?>
 
@@ -458,3 +443,46 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
 </body>
 
 </html>
+
+
+<!-- transaksi -->
+<form method="post" action="proses_transaksi.php">
+                                 <!-- Modal body -->
+                                <div class="modal-body">
+                                    Pilih produk
+                                    <select name="ProdukID" class="form-control" id="ProdukID">
+                                        <?php
+                                        // $getproduk = mysqli_query($c, "SELECT * FROM produk)");
+                                        $getproduk = mysqli_query($c, "SELECT * FROM produk");
+                                        if (!$getproduk) {
+                                            die("Error in SQL query: " . mysqli_error($c));
+                                        }
+
+                                        while ($pl = mysqli_fetch_array($getproduk)) {
+                                            $namaproduk = $pl['NamaProduk'];
+                                            $deskripsi = $pl['Deskripsi'];
+                                            $idproduk = $pl['ProdukID'];
+                                            $stok = $pl['Stok'];
+                                        ?>
+                                            <option value="<?= $idproduk; ?>"><?= $namaproduk; ?> - <?= $deskripsi; ?>(Stok: <?=$stok;?>)</option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <input type="number" name="JumlahProduk" class="form-control mt-4" placeholder="Jumlah" min="1" required>
+                                    <label for="uang_pembayaran">Uang Pembayaran:</label>
+                                    <input type="number" name="uang_pembayaran" id="uang_pembayaran" min="0" required>
+
+                                    <button type="submit">Tambah ke Keranjang</button>
+                                </div>
+                                
+
+                                <!-- Modal footer -->
+                                <!-- <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" name="barangmasuk">Submit</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                                <!-- </div> -->
+
+                            </form>
+<!-- transaksi -->

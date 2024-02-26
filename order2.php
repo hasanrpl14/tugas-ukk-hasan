@@ -2,23 +2,6 @@
 include 'koneksi.php';
 include 'ceklogin.php';
 
-if(isset($_GET['idp'])){
-    $idp = $_GET['idp'];
-
-    $ambilnamapelanggan = mysqli_query($c, "SELECT * FROM penjualan p, pelanggan pl WHERE p.PelangganID=pl.PelangganID AND p.PenjualanID=$idp");
-
-if (!$ambilnamapelanggan) {
-    die("Kueri gagal ambil nama: " . mysqli_error($c));
-}
-
-$np = mysqli_fetch_array($ambilnamapelanggan);
-   $namapel = $np['NamaPelanggan'];
-   $idpel = $np['PelangganID'];
-
-}   else{
-    header('Location:index.php');
-}
-
 
 // validasi if di atas jika tidak ada url view.php?idp=1 
 // intinya jika di urlnya tidak ada id pesanan maka akan kembali ke halaman index
@@ -95,8 +78,8 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Data Pesanan : <?=$idpel;?></h5>
-                            <h5 class="m-b-10">Data Pesanan : <?=$namapel;?></h5>
+                            <h5 class="m-b-10">Data Pesanan :</h5>
+                            <h5 class="m-b-10">Data Pesanan :</h5>
                     </div>
                 </div>
             </div>

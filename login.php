@@ -42,8 +42,8 @@
 							<input type="text" class="form-control" id="Email" placeholder="">
 						</div> -->
 						<div class="form-group mb-3">
-							<label class="floating-label" for="Email">Email</label>
-							<input type="email" class="form-control" id="Email" name="email" placeholder="">
+							<label class="floating-label" for="Email">Username</label>
+							<input type="text" class="form-control" id="Email" name="username" placeholder="">
 						</div>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Password">Password</label>

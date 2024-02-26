@@ -118,7 +118,7 @@
                                 <div class="modal-body">
                                     <input type="hidden" name="IDUser" class="form-control" placeholder="Username">
                                     <input type="text" name="NamaUser" class="form-control" placeholder="Username">
-                                    <input type="email" name="Email" class="form-control mt-2" placeholder="Email">
+                                    <input type="nama" name="nama" class="form-control mt-2" placeholder="nama">
                                     <input type="text" name="Password" class="form-control mt-2" placeholder="Password">          
 
                                     <label for="level">Pilih Level</label>
@@ -187,14 +187,14 @@
                                         while ($p = mysqli_fetch_array($get)) {
                                             $iduser = $p['IdUser'];
                                             $username = $p['username'];
-                                            $email = $p['email'];
+                                            $nama = $p['nama'];
                                             $password = $p['password'];
                                             $level = $p['level'];
                                 ?>
                                             <tr>
                                                 <td><?= $iduser ; ?></td>
                                                 <td><?= $username; ?></td>
-                                                <td><?= $email; ?></td>
+                                                <td><?= $nama; ?></td>
                                                 <td><?= $level; ?></td>
                                                 <td>
                                                     <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#edituser<?=$iduser;?>">
@@ -222,7 +222,7 @@
                                      <!-- Modal body -->
                                      <div class="modal-body">
                                         <input type="text" name="NamaUser" class="form-control" placeholder="Nama Pelanggan" value="<?= $username; ?>">
-                                        <input type="text" name="Email" class="form-control mt-2" placeholder="No Telepon" value="<?= $email; ?>">
+                                        <input type="text" name="nama" class="form-control mt-2" placeholder="No Telepon" value="<?= $nama; ?>">
                                         <input type="text" name="Password" class="form-control mt-2" placeholder="Alamat" value="<?= $password; ?>">
                                         <label for="level">Pilih Level</label>
                                             <select name="level" class="form-control">

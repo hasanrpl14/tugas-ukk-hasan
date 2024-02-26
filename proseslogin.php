@@ -6,13 +6,13 @@ session_start();
 include 'koneksi.php';
 
 // menangkap data yang dikirim dari form login
-$email = $_POST['email'];
+$username = $_POST['username'];
 // $password = md5($_POST['password']);
 $password = ($_POST['password']);
 
 
 // menyeleksi data user dengan username dan password yang sesuai
-$login = mysqli_query($c,"select * from user where email='$email' and password='$password'");
+$login = mysqli_query($c,"select * from user where username='$username' and password='$password'");
 // $login = mysqli_query($c, "SELECT * FROM user WHERE username='$username' AND password='$password' AND nama='$nama'");
 
 // menghitung jumlah data yang ditemukan
@@ -27,7 +27,7 @@ if($cek > 0){
 	if($data['level']=="admin"){
 
 		// buat session login dan username
-		$_SESSION['email'] = $email;
+		$_SESSION['username'] = $username;
 		// $_SESSION['nama'] = $username;
 		$_SESSION['level'] = "admin";
 		// $_SESSION['level'] = "petugas";
@@ -35,7 +35,7 @@ if($cek > 0){
 		// header("location:test.html");
 		header("location:index.php");
 	} elseif ($data['level']== "petugas") {
-		$_SESSION['email'] = $email;
+		$_SESSION['username'] = $username;
 		$_SESSION['level'] = "petugas";
 		// $_SESSION['level'] = "petugas";
 		// alihkan ke halaman dashboard admin

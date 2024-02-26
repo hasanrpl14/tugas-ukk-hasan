@@ -62,7 +62,7 @@
 						</div>
 						<div class="form-group mb-3">
 							<label class="floating-label" for="email">Email</label>
-							<input type="email" class="form-control" id="email" placeholder="" name="email">
+							<input type="tesxt" class="form-control" id="email" placeholder="" name="nama">
 						</div>
 						<div class="form-group mb-4">
 							<label class="floating-label" for="level">Pilih Level</label>

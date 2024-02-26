@@ -92,71 +92,72 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
-        <div class="row">
-            <div class="col-lg-7 col-md-12">
-                <!-- support-section start -->
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card support-bar overflow-hidden">
-                            <div class="card-body pb-0">
-                                <h3 class="m-0 text-center text-c-blue">Stok Barang</h3>
-                                <!-- <span class="text-c-green">Support Requests</span> -->
-                                <h1 class="mb-3 mt-3 text-center"><?=$h2;?></h1>
-                            </div>
-                            <!-- <div id="support-chart1"></div> -->
-                            <div class="card-footer bg-primary text-white">
-                                <div class="row text-center">
-                                    <div class="col">
-                                        <span><a href="stok.php">
-                                        <h5 class="m-0 text-white">Detail Barang</h5>
-                                        </a></span>
-                                    </div>
+        <!-- awal kolom detail -->
+    <div class="col-xl-12">
+    <div class="row">
+        <div class="col-sm-12 col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <!-- <h5 class="card-title"></h5> -->
+                    <h3 class="m-0 text-center text-c-blue">Stok Barang</h3>
+                    <h1 class="mb-3 mt-3 text-center"><?=$h2;?></h1>
+                    <!-- <a href="#!" class="btn  btn-primary">Go somewhere</a> -->
+                        <div class="card-footer bg-primary text-white">
+                            <div class="row text-center">
+                                <div class="col">
+                                    <span><a href="stok.php">
+                                    <h5 class="m-0 text-white">Detail Barang</h5>
+                                    </a></span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card support-bar overflow-hidden">
-                            <div class="card-body pb-0">
-                                <h3 class="m-0 text-center text-c-green">Penjualan</h3>
-                                <!-- <span class="text-c-green">Support Requests</span> -->
-                                <h1 class="mb-3 mt-3 text-center"><?=$h4;?></h1>
-                            </div>
-                            <!-- <div id="support-chart1"></div> -->
-                            <div class="card-footer bg-success text-white">
-                                <div class="row text-center">
-                                    <div class="col">
-                                        <span><a href="order.php">
-                                        <h5 class="m-0 text-white">Detail Penjualan</h5>
-                                        </a></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="card support-bar overflow-hidden">
-                            <div class="card-body pb-0">
-                                <h3 class="m-0 text-center text-c-red">Pelanggan</h3>
-                                <!-- <span class="text-c-green">Support Requests</span> -->
-                                <h1 class="mb-3 mt-3 text-center"><?=$h6;?></h1>
-                            </div>
-                            <!-- <div id="support-chart1"></div> -->
-                            <div class="card-footer bg-c-red text-white">
-                                <div class="row text-center">
-                                    <div class="col">
-                                        <span><a href="pelanggan.php">
-                                        <h5 class="m-0 text-white">Detail Pelanggan</h5>
-                                        </a></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <!-- support-section end -->
             </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <!-- <h5 class="card-title"></h5> -->
+                    <h3 class="m-0 text-center text-c-green">Penjualan</h3>
+                    <h1 class="mb-3 mt-3 text-center"><?=$h4;?></h1>
+                    <!-- <a href="#!" class="btn  btn-primary">Go somewhere</a> -->
+                        <div class="card-footer bg-c-green text-white">
+                            <div class="row text-center">
+                                <div class="col">
+                                    <span><a href="stok.php">
+                                    <h5 class="m-0 text-white">Detail Penjualan</h5>
+                                    </a></span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <!-- <h5 class="card-title"></h5> -->
+                    <h3 class="m-0 text-center text-c-red">Pelanggan</h3>
+                    <h1 class="mb-3 mt-3 text-center"><?=$h6;?></h1>
+                    <!-- <a href="#!" class="btn  btn-primary">Go somewhere</a> -->
+                        <div class="card-footer bg-c-red text-white">
+                            <div class="row text-center">
+                                <div class="col">
+                                    <span><a href="stok.php">
+                                    <h5 class="m-0 text-white">Detail Pelanggan</h5>
+                                    </a></span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- akhir kolom detail -->
          
             <!-- prject ,team member start -->
 

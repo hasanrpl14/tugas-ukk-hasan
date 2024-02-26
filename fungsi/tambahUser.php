@@ -5,10 +5,10 @@ require '../koneksi.php';
 if(isset($_POST['tambahuser'])){
     $username = $_POST['NamaUser'];
     $password = $_POST['Password'];
-    $email = $_POST['Email'];
+    $nama = $_POST['nama'];
     $level = $_POST['level'];
 
-    $insert = mysqli_query($c, "INSERT INTO user (username, password, email, level) VALUES ('$username','$password','$email','$level')");
+    $insert = mysqli_query($c, "INSERT INTO user (username, password, nama, level) VALUES ('$username','$password','$nama','$level')");
 
     if($insert){
         echo '

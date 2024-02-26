@@ -143,10 +143,10 @@
     <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Data Table</h5>
-                        <div class="alert alert-primary" role="alert">
+                        <h5>Data Stok Barang</h5>
+                        <!-- <div class="alert alert-primary" role="alert">
 							A simple primary alert—check it out!
-						</div>
+						</div> -->
                         <span class="d-block m-t-5">use class <code>table-hover</code> inside table element</span>
                     </div>
                     <div class="card-body table-border-style">

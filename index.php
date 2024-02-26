@@ -125,7 +125,7 @@
                         <div class="card-footer bg-c-green text-white">
                             <div class="row text-center">
                                 <div class="col">
-                                    <span><a href="stok.php">
+                                    <span><a href="order.php">
                                     <h5 class="m-0 text-white">Detail Penjualan</h5>
                                     </a></span>
                                 </div>
@@ -145,7 +145,7 @@
                         <div class="card-footer bg-c-red text-white">
                             <div class="row text-center">
                                 <div class="col">
-                                    <span><a href="stok.php">
+                                    <span><a href="pelanggan.php">
                                     <h5 class="m-0 text-white">Detail Pelanggan</h5>
                                     </a></span>
                                 </div>

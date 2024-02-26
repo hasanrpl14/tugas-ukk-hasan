@@ -124,7 +124,7 @@ include 'ceklogin.php';
                                         ?>
                                     </select>
                                     <input type="number" name="JumlahProduk" class="form-control mt-4" placeholder="Jumlah" min="1" required>
-                                    <input type="number" name="uang_pembayaran" class="form-control mt-4" placeholder="Uang Pembayaran" min="0" required>
+                                    <!-- <input type="number" name="uang_pembayaran" class="form-control mt-4" placeholder="Uang Pembayaran" min="0" required> -->
 
                                 </div>
 
@@ -152,12 +152,12 @@ include 'ceklogin.php';
                         <h5>Data Table</h5>
                         
                         <?php   
-                                $get = mysqli_query($c, "SELECT * FROM penjualan");
-                                while ($p = mysqli_fetch_array($get)) {
-                                    $totalHarga = $p['TotalHarga'];
-                                    // Lakukan sesuatu dengan $totalHarga
-                                }
-                            ?>
+                            $get = mysqli_query($c, "SELECT * FROM penjualan");
+                            while ($p = mysqli_fetch_array($get)) {
+                                $totalHarga = $p['TotalHarga'];
+                                // Lakukan sesuatu dengan $totalHarga
+                            }
+                        ?>
         
                         <div class="alert alert-primary" role="alert">
 							A simple primary alert—check it out!
@@ -209,9 +209,9 @@ include 'ceklogin.php';
                                                     <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#prosesdetailpesanan<?=$iddp?>">
                                                         Proses 
                                                     </button>
-                                                    <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#editdetailpesanan<?=$idpr?>">
+                                                    <!-- <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#editdetailpesanan<?=$idpr?>">
                                                         Edit 
-                                                    </button>
+                                                    </button> -->
                                                     <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#delete<?=$idpr;?>">
                                                         Hapus 
                                                     </button>
@@ -369,15 +369,41 @@ include 'ceklogin.php';
                                  <table class="table table-stripped">
 							
 							<!-- aksi ke table nota -->
-							<form method="post" action="">
+							<form method="post" action="bayar.php">
+                            <?php   
+                            $get = mysqli_query($c, "SELECT * FROM transaksi");
+                            while ($p = mysqli_fetch_array($get)) {
+                                // $totalHarga = $p['TotalHarga'];
+                                $kembalian = $p['Kembalian'];
+                                // Lakukan sesuatu dengan $totalHarga
+                            }
+                        ?>
+                        <?php
+                        // Query untuk mengambil total harga dari semua transaksi
+                        $get = mysqli_query($c, "SELECT SUM(TotalHarga) AS total FROM transaksi");
+
+                        // Periksa apakah query berhasil dieksekusi
+                        if ($get) {
+                            // Ambil hasil query
+                            $totalHargaRow = mysqli_fetch_assoc($get);
+                            // Ambil total harga
+                            $totalHarga = $totalHargaRow['total'];
+                        } else {
+                            // Tampilkan pesan jika query gagal dieksekusi
+                            echo "Error: " . mysqli_error($c);
+                        }
+                        ?>
 						
 								<tr>
 									<td>Total Semua  </td>
 									<td><input type="text" class="form-control" name="total" value="Rp<?=number_format($totalHarga); ?>" readonly></td>
                              		
-									<td>Bayar  </td>
-									<td><input type="number" class="form-control" name="bayar" value=""></td>
-									<td><button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Bayar</button>
+									<td>Bayar</td>
+									<td>
+                                        <input type="number" name="uang_pembayaran" class="form-control" placeholder="Uang Pembayaran" min="1" required>
+                                    </td>
+                         
+									<td><button class="btn btn-success" type="submit" name=""><i class="fa fa-shopping-cart"></i> Bayar</button>
 								
 										<a class="btn btn-danger" href="">
 										<b>RESET</b></a></td></td>
@@ -386,7 +412,7 @@ include 'ceklogin.php';
 							<!-- aksi ke table nota -->
 							<tr>
 								<td>Kembali</td>
-								<td><input type="text" class="form-control" value=""></td>
+								<td><input type="text" class="form-control" value="Rp<?= $kembalian; ?>"></td>
 								<td></td>
 								<td>
 									<a href="cetak.php?idp=<?= $idp;?>" target="_blank">

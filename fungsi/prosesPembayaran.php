@@ -10,10 +10,20 @@ if(isset($_POST['prosesdetailpesanan'])){
     $iddp = $_POST['iddp'];
     $PelangganID = $_POST['idpel'];
     $Subtotal = $JumlahProduk * $Harga;
+    $TotalHarga = $_POST['TotalHarga']; // Pastikan ini diambil dari input form
 
-    $insert = mysqli_query($c, "UPDATE detailpenjualan SET Subtotal='$Subtotal', JumlahProduk='$JumlahProduk' where DetailID='$iddp'");
-    // mysqli_query($koneksi,"update produk set Stok='$Stok_total' where ProdukID='$ProdukID'");
-    if($insert){
+    // Update detailpenjualan
+    $insert = mysqli_query($c, "UPDATE detailpenjualan SET Subtotal='$Subtotal', JumlahProduk='$JumlahProduk' WHERE DetailID='$iddp'");
+    
+    // Hitung kembali total harga dari seluruh detail penjualan
+    $detailpenjualan = mysqli_query($c, "SELECT SUM(Subtotal) AS TotalHarga FROM detailpenjualan WHERE PenjualanID='$idp'");
+    $hasil = mysqli_fetch_assoc($detailpenjualan);
+    $totalHarga = $hasil['TotalHarga'];
+
+    // Update penjualan dengan total harga baru
+    $update = mysqli_query($c,"UPDATE penjualan SET TotalHarga='$totalHarga' WHERE PenjualanID='$idp'");
+
+    if($insert && $update){
         header('location:../view.php?idp='.$idp);
     } else {
         echo '
@@ -23,6 +33,4 @@ if(isset($_POST['prosesdetailpesanan'])){
         ';
     }
 }
-
-
 ?>

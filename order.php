@@ -89,7 +89,7 @@
                     </div>
                 </div>
                     <!-- Button to Open the Modal -->
-                 <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
+                 <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#tambahpelanggan">
                     Tambah Pelanggan
                 </button>
             </div>
@@ -100,6 +100,44 @@
                 </button>
 
              <div class="col">
+
+
+             <!-- The Modal -->
+             <div class="modal fade" id="tambahpelanggan">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Tambah Data pelanggan</h4>
+                                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+
+                            <form method="post" action="./fungsi/tambahPelangganOrder.php">
+                                <!-- fungsi tambahPelangganOrder jadi itu tambah pelanggan di file order -->
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <input type="text" name="NamaPelanggan" class="form-control" placeholder="Nama Pelanggan">
+                                    <input type="num" name="NomorTelepon" class="form-control mt-2" placeholder="No telepon">
+                                    <input type="text" name="Alamat" class="form-control mt-2" placeholder="Alamat">
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" name="tambahpelanggan">Submit</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+
                     <!-- The Modal -->
                 <div class="modal fade" id="myModal">
                     <div class="modal-dialog">

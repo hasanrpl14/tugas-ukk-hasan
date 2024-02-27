@@ -113,8 +113,9 @@ if(isset($_GET['idp'])){
             ?>
             <tr><td colspan='5' class="separator"></td></tr>
             <tr>
-                <td colspan='4'><div style='text-align:right'>Biaya Adm :</div></td>
-                <td>Rp0</td>
+                <!-- <td colspan='4'><div style='text-align:right'>Biaya Adm :</div></td> -->
+                <td colspan='4'><div style='text-align:right'>Bayar :</div></td>
+                <td id="detail_pembayaran">Rp<?= number_format($bayar); ?></td>
             </tr>
             <tr>
                 <td colspan='4'><div style='text-align:right; color:black'>Total :</div></td>
@@ -134,13 +135,29 @@ if(isset($_GET['idp'])){
             </tr>
             <tr>
                 <td colspan='4'><div style='text-align:right; color:black'>Sisa :</div></td>
-                <td style='color:black'>Rp0</td>
+                <td style='color:black' id="kembalian">Rp<?= number_format($kembalian); ?></td>
             </tr>
         </table>
         <div class="center" style="font-size: 12pt;"><br>****** TERIMAKASIH ******<br></div>
     </div>
 </body>
 </html>
+
+<script>
+        // Ambil nilai dari localStorage saat halaman dimuat
+        window.onload = function() {
+            // Ambil nilai bayar dan kembalian dari localStorage
+            var bayar = localStorage.getItem('bayar');
+            var kembalian = localStorage.getItem('kembalian');
+
+            // Tampilkan nilai di dalam div dengan id "detail_pembayaran"
+            var detail_pembayaran = document.getElementById('detail_pembayaran');
+            detail_pembayaran.innerHTML =  bayar;
+            // Tampilkan nilai di dalam div dengan id "detail_pembayaran"
+            var detail_pembayaran = document.getElementById('kembalian');
+            detail_pembayaran.innerHTML =   kembalian;
+        }
+    </script>
 
 <script>
 window.print();

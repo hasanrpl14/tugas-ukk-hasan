@@ -225,7 +225,7 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                                 <td><?= $namaproduk; ?> (<?=$desk; ?>) </td>
                                                 <td>Rp<?=number_format($harga); ?></td>
                                                 <td>
-                                                    <?=$qty;?>
+                                                    <input type="number" class="form-control" value="<?=$qty;?>">
                                                 </td>
                                                 <td>Rp<?=number_format($subtotal); ?></td>
                                                 <td>
@@ -277,18 +277,6 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
                                                     <input type="hidden" name="harga" class="form-control mt-2" value="<?=$harga?>">
                                                     <input type="hidden" name="subtotal" class="form-control mt-2" value="<?=$subtotal?>">
                                                     <input type="hidden" name="idpel" class="form-control mt-2" value="<?=$idpel?>">
-                                            <?php 
-                                                $detailpenjualan = mysqli_query($c, "SELECT SUM(Subtotal) AS TotalHarga FROM detailpenjualan WHERE PenjualanID='$idp'");
-                                                if (!$detailpenjualan) {
-                                                    die("Error: " . mysqli_error($c));
-                                                }
-
-                                                $hasil = mysqli_fetch_assoc($detailpenjualan);
-                                                $totalHarga = $hasil['TotalHarga'];
-                                            ?>
-                                            
-                                                    <input type="text" class="form-control" style="width: 50%;"
-                                                         name="TotalHarga" value="<?php echo $totalHarga; ?>" readonly>
                                                 </div>
 
                                                 <!-- Modal Footer -->
@@ -372,54 +360,73 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
 
                                     <table class="table table-stripped">
 							
-							<!-- aksi ke table nota -->
-<form method="POST" action="">
-    <tr>
-        <td>Total Semua</td>
-        <td><input type="text" class="form-control" name="total" value="Rp<?= number_format($totalHarga); ?>" readonly></td>
-        <td>Bayar</td>
-        <td><input type="text" class="form-control" name="bayar" id="input_bayar" value=""></td>
-        <td>
-            <button class="btn btn-success" type="button" onclick="hitungKembalian()">
-                <i class="fa fa-shopping-cart"></i> Bayar
-            </button>
-            <button class="btn btn-danger" type="reset" onclick="resetKembalian()">
-                <b>RESET</b>
-            </button>
-        </td>
-    </tr>
-</form>
-
+							
+                            <!-- aksi ke table nota -->
+                            <form method="POST" action="">
+                                <tr>
+                                    <td>Total Semua</td>
+                                    <td><input type="text" class="form-control" name="total" value="Rp<?= number_format($totalHarga); ?>" readonly></td>
+                                    <td>Bayar</td>
+                                    <td><input type="text" class="form-control" name="bayar" id="input_bayar" value=""></td>
+                                    <td>
+                                        <button class="btn btn-success" type="button" onclick="hitungKembalian()">
+                                            <i class="fa fa-shopping-cart"></i> Bayar
+                                        </button>
+                                        <button class="btn btn-danger" type="reset">
+                                            <b>RESET</b>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </form>
                             <!-- aksi ke table nota -->
                             <tr>
-                            <td>Kembali</td>
-<td><input type="text" class="form-control" id="kembalian" value=""></td>
-<td></td>
-<td>
+                                <td>Kembali</td>
+                                <td><input type="text" class="form-control" id="kembalian" value=""></td>
+                                <td></td>
+                                <td>
 
-    <a href="cetak.php?idp=<?= $idp;?>" target="_blank">
-        <button class="btn btn-secondary">
-            <i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
-        </button>
-    </a>
-    <br><br>
+                                            <a href="cetak.php?idp=<?= $idp;?>" target="_blank">
+                                                <button class="btn btn-secondary">
+                                                    <i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
+                                                </button>
+                                            </a>
+                                            <br><br>
 
-</td>
-</tr>
+                                            <?php   
+                                $get = mysqli_query($c, "SELECT * FROM penjualan");
+                                while ($p = mysqli_fetch_array($get)) {
+                                    $totalHarga = $p['TotalHarga'];
+                                    // Lakukan sesuatu dengan $totalHarga
+                                }
+                            ?>
+                                        <form method="post" action="./fungsi/simpan_Totalpembayaran.php">
+                                            <?php 
+                                            $detailpenjualan = mysqli_query($c, "SELECT SUM(Subtotal) AS TotalHarga FROM detailpenjualan WHERE PenjualanID='$idp'");
+                                            if (!$detailpenjualan) {
+                                                die("Error: " . mysqli_error($c));
+                                            }
 
-<script>
-    // Fungsi untuk mengisi nilai bayar dan kembalian dari localStorage saat halaman dimuat
-    window.onload = function() {
-        var bayar = localStorage.getItem('bayar');
-        var kembalian = localStorage.getItem('kembalian');
-        if (bayar) {
-            document.getElementById('input_bayar').value = bayar;
-        }
-        if (kembalian) {
-            document.getElementById('kembalian').value = kembalian;
-        }
-    }
-    
+                                            $hasil = mysqli_fetch_assoc($detailpenjualan);
+                                            $totalHarga = $hasil['TotalHarga'];
+
+                                            ?>
+                                                        <input type="text" class="form-control" style="width: 50%;"
+                                                         name="TotalHarga" value="<?php echo $totalHarga; ?>" readonly>
+                                                        <input type="hidden" name="idp" class="form-control mt-2" value="<?=$idp?>">
+                                                        <input type="hidden" name="idpel" class="form-control mt-2" value="<?=$idpel?>">
+                                                        <button type="submit" class="btn btn-primary">Simpan Transaksi</button>
+
+                                        </form>
+
+
+                                            
+
+            
+                                </td>
+
+                            </tr>
+
+                            <script>
     function hitungKembalian() {
         // Ambil nilai total harga
         var totalHarga = <?= $totalHarga; ?>;
@@ -431,49 +438,45 @@ $np = mysqli_fetch_array($ambilnamapelanggan);
         if (bayar < totalHarga) {
             alert('Uang yang dibayarkan tidak cukup!');
             return;
-        } else if (bayar == totalHarga) {
-            // Jika uang pas, atur kembalian menjadi 0
-            document.getElementById('kembalian').value = 0;
-            // Simpan nilai bayar dan kembalian di localStorage
-            localStorage.setItem('bayar', bayar);
-            localStorage.setItem('kembalian', 0);
-            alert('Transaksi berhasil! Uang pas.');
-        } else {
-            // Hitung kembalian
-            var kembalian = bayar - totalHarga;
-            
-            // Set nilai kembalian pada input kembalian
-            document.getElementById('kembalian').value = kembalian;
-
-            // Simpan nilai bayar dan kembalian di localStorage
-            localStorage.setItem('bayar', bayar);
-            localStorage.setItem('kembalian', kembalian);
-
-            alert('Transaksi berhasil! Kembalian: ' + kembalian);
         }
-    }
-
-    // Fungsi untuk mereset nilai kembalian menjadi kosong
-    function resetKembalian() {
-        document.getElementById('kembalian').value = '';
-        localStorage.removeItem('kembalian'); // Mengosongkan kembalian di localStorage
+        
+        // Hitung kembalian
+        var kembalian = bayar - totalHarga;
+        
+        // Set nilai kembalian pada input kembalian
+        document.getElementById('kembalian').value = kembalian;
     }
 </script>
-
-</script>
-
-
-
-
-
-
-
 
 
 
 						</table>
 
-                        
+                        <?php   
+                                $get = mysqli_query($c, "SELECT * FROM penjualan");
+                                while ($p = mysqli_fetch_array($get)) {
+                                    $totalHarga = $p['TotalHarga'];
+                                    // Lakukan sesuatu dengan $totalHarga
+                                }
+                            ?>
+                                        <form method="post" action="./fungsi/simpan_Totalpembayaran.php">
+                                            <?php 
+                                            $detailpenjualan = mysqli_query($c, "SELECT SUM(Subtotal) AS TotalHarga FROM detailpenjualan WHERE PenjualanID='$idp'");
+                                            if (!$detailpenjualan) {
+                                                die("Error: " . mysqli_error($c));
+                                            }
+
+                                            $hasil = mysqli_fetch_assoc($detailpenjualan);
+                                            $totalHarga = $hasil['TotalHarga'];
+
+                                            ?>
+                                                        <input type="text" class="form-control" style="width: 50%;"
+                                                         name="TotalHarga" value="<?php echo $totalHarga; ?>" readonly>
+                                                        <input type="hidden" name="idp" class="form-control mt-2" value="<?=$idp?>">
+                                                        <input type="hidden" name="idpel" class="form-control mt-2" value="<?=$idpel?>">
+                                                        <button type="submit" class="btn btn-primary">Simpan Transaksi</button>
+
+                                        </form>
 
                         </div>
                     </div>

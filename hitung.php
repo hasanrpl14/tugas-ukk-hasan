@@ -11,7 +11,7 @@ function hitungKembalian($totalBelanja, $jumlahUangDiberikan) {
     } elseif ($kembalian == 0) {
         return "Terima kasih, uang yang diberikan pas dengan total belanja.";
     } else {
-        return "Kembalian: " . $kembalian . " USD. Terima kasih, silakan ambil kembalian Anda.";
+        return "Kembalian: " . $kembalian . " RP. Terima kasih, silakan ambil kembalian Anda.";
     }
 }
 
@@ -42,7 +42,7 @@ if (isset($_POST['total_belanja']) && isset($_POST['jumlah_uang'])) {
     <h2>Form Pembayaran</h2>
     <form action="" method="post">
         <label for="total_belanja">Total Belanja:</label>
-        <input type="number" name="total_belanja" id="total_belanja" required><br><br>
+        <input type="number" name="total_belanja" id="total_belanja" value="20000" required><br><br>
 
         <label for="jumlah_uang">Jumlah Uang yang Diberikan:</label>
         <input type="number" name="jumlah_uang" id="jumlah_uang" required><br><br>

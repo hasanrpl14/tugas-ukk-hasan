@@ -32,8 +32,8 @@ $hasil = mysqli_fetch_array($query);
 					<li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-database"></i></span><span class="pcoded-mtext">Data Master</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="stok.php" target="_blank">Stok Barang</a></li>
-					        <li><a href="masuk.php" target="_blank">Barang Masuk</a></li>
+					        <li><a href="stok.php" target="_blank"></i>Stok Barang</a></li>
+					        <li><a href="masuk.php" target="_blank"></i>Barang Masuk</a></li>
 					        <li><a href="pelanggan.php" target="_blank">Kelola Pelanggan</a></li>
 					    </ul>
 					</li>
@@ -41,10 +41,11 @@ $hasil = mysqli_fetch_array($query);
 					    <label>Transaksi</label>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
-					<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-database"></i></span><span class="pcoded-mtext">Transaksi</span></a>
+					<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-shopping-cart"></i></span><span class="pcoded-mtext">Transaksi</span></a>
 					    <ul class="pcoded-submenu">
 					        <li><a href="order.php" target="_blank">Order 1 </a></li>
 					        <li><a href="order2.php" target="_blank">Order 2 </a></li>
+							<li><a href="barangterjual.php" target="_blank">Laporan Penjualan</a></li>
 					    </ul>					    
 					</li>
 					<?php
@@ -68,16 +69,6 @@ $hasil = mysqli_fetch_array($query);
                         ?>
 					
 				</ul>
-				
-				
-				<!-- <div class="card text-center">
-					<div class="card-block">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<i class="feather icon-sunset f-40"></i>
-						<h6 class="mt-3">Download Pro</h6>
-						<p>Getting more features with pro version</p>
-						<a href="https://1.envato.market/qG0m5" target="_blank" class="btn btn-primary btn-sm text-white m-0">Upgrade Now</a>
-					</div>
-				</div> -->
+			
 				
 			</div>

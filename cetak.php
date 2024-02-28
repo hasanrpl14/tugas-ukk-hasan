@@ -122,18 +122,6 @@ if(isset($_GET['idp'])){
                 <td style='color:black'>Rp<?= number_format($total); ?></td>
             </tr>
             <tr>
-                <td colspan='4'><div style='text-align:right; color:black'>Cash :</div></td>
-                <td style='color:black'>Rp0</td>
-            </tr>
-            <tr>
-                <td colspan='4'><div style='text-align:right; color:black'>Change :</div></td>
-                <td style='color:black'>Rp</td>
-            </tr>
-            <tr>
-                <td colspan='4'><div style='text-align:right; color:black'>DP :</div></td>
-                <td style='color:black'>Rp0</td>
-            </tr>
-            <tr>
                 <td colspan='4'><div style='text-align:right; color:black'>Sisa :</div></td>
                 <td style='color:black' id="kembalian">Rp<?= number_format($kembalian); ?></td>
             </tr>
